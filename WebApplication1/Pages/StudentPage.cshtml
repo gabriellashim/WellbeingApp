@@ -1,0 +1,19 @@
+﻿@page
+@model Quokka_App.Pages.StudentPageModel
+@{
+}
+
+
+<form method="post">
+    <div>How are you feeling today?</div>
+        <input type="submit" value="Happy" asp-page-handler="Happy_Buton" />
+        <input type="submit" value="Okay" asp-page-handler="Okay_Button" /> 
+        <br />
+        <input type="submit" value="Annoyed" asp-page-handler="Annoyed_Button" />
+        <input type="submit" value="Frustrated" asp-page-handler="Frustrated_Button" />
+        <br />
+        <input type="submit" value="Angry" asp-page-handler="Angry_Button" />
+        <input type="submit" value="I need help" asp-page-handler="Inh_Button" />
+
+
+</form>
