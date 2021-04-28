@@ -20,7 +20,13 @@ namespace WebApplication1.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("WebAppContextConnection")));
 
-                services.AddDefaultIdentity<WebAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<WebAppUser>(options => {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+
+
+                })
                     .AddEntityFrameworkStores<WebAppContext>();
             });
         }
