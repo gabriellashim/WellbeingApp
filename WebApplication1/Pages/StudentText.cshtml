@@ -1,0 +1,13 @@
+﻿@page
+@model Quokka_App.Pages.StudentTextModel
+@{
+    ViewData["Title"] = "StudentText";
+}
+
+
+<form method="post">
+    <div>You have selected []. Write a message to your leader below.</div>
+    <textarea id="stutxt" name="StudentText" rows="4" cols="50">Write your message here.</textarea>
+    <br />
+    <a href="/StudentRequest" class="btn btn-primary">Next</a>
+</form>

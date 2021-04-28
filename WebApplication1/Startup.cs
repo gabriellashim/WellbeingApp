@@ -29,7 +29,6 @@ namespace WebApplication1
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-
             services.AddMvc().AddRazorPagesOptions(options => {
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
