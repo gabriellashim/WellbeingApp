@@ -91,7 +91,10 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                     {
                         return LocalRedirect("~/studentpage");
                     }
-                    else { return LocalRedirect(returnUrl); }
+                    else
+                    {
+                        return LocalRedirect("~/leaderpage");
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

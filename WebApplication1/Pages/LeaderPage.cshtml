@@ -1,0 +1,18 @@
+﻿@page
+@model Quokka_App.Pages.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+@{
+    ViewData["Title"] = "LeaderPage";
+
+}
+
+<form method="post">
+    <div>Good day @UserManager.GetUserAsync(User).Result.FirstName!</div>
+    <a href="/Studenttext" class="btn btn-primary">Add Student</a>
+    <a href="/Studenttext" class="btn btn-primary">View Notification</a>
+    <a href="/Studenttext" class="btn btn-primary">View Student</a>
+</form>
