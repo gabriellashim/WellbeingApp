@@ -57,6 +57,14 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "SchoolID")]
+            public string SchoolID { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "AccountType")]
+            public string AccountType { get; set; }
+
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -85,7 +93,8 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebAppUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName };
+                var accType = Request.Form["Account"];
+                var user = new WebAppUser { UserName = Input.SchoolID, FirstName = Input.FirstName, LastName = Input.LastName, AccountType = Input.AccountType};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -104,7 +113,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new {returnUrl = returnUrl });
                     }
                     else
                     {
