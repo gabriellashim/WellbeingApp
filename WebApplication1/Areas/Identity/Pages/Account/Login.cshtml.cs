@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebApplication1.Areas.Identity.Data;
+using Ubiety.Dns.Core;
 
 namespace WebApplication1.Areas.Identity.Pages.Account
 {
@@ -21,6 +22,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
         private readonly UserManager<WebAppUser> _userManager;
         private readonly SignInManager<WebAppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+
 
         public LoginModel(SignInManager<WebAppUser> signInManager, 
             ILogger<LoginModel> logger,
@@ -52,6 +54,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -85,9 +88,10 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-
                     // controls the user login depending on their roles
-                    if (_userManager.GetUserAsync(User).Result.AccountType == "Leader")
+
+
+                    if (_userManager.GetUserAsync(User).Result.AccountType == "Student")
                     {
                         return LocalRedirect("~/studentpage");
                     }
