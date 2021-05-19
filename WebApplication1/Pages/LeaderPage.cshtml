@@ -1,14 +1,16 @@
 ﻿@page
-@model Quokka_App.Pages.IndexModel
+@model Quokka_App.Pages.LeaderPageModel
 @using Microsoft.AspNetCore.Identity
 @using WebApplication1.Areas.Identity.Data
 
 @inject SignInManager<WebAppUser> SignInManager
 @inject UserManager<WebAppUser> UserManager
+
 @{
     ViewData["Title"] = "LeaderPage";
 
 }
+
 
 <form method="post">
     <div>Good day @UserManager.GetUserAsync(User).Result.FirstName!</div>

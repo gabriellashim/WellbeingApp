@@ -1,0 +1,38 @@
+﻿@page
+@model Quokka_App.Pages.LeaderListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<div class="text-center>
+    <h1 class="display-4">Student list for leaders</h1>
+    <h2>Student Database</h2>
+    <hr />
+</div>
+
+
+<table class="table" border="1">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>School ID</th>
+    </tr>
+    @foreach (var i in Model.displayData)
+    {
+
+
+        @if (i.AccountType == "Student")
+        {
+            <tr>
+                <td>@i.FirstName</td>
+                <td>@i.LastName</td>
+                <td>@i.UserName</td>
+                <td>@Html.ActionLink("Add", "Add")</td>
+            </tr>
+        }
+        else 
+        { 
+        
+        }
+    }
+</table>

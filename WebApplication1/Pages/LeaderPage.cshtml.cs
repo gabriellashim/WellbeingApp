@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Quokka_App.Pages
 {
-    public class IndexModel : PageModel
+    public class LeaderPageModel : PageModel
     {
         public void OnGet()
         {
