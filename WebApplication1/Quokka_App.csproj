@@ -2,7 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>9400b103-6032-4c2d-8cb4-be5500805964</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\images\1happy.png" />
+    <None Include="wwwroot\lib\images\2okay.png" />
+    <None Include="wwwroot\lib\images\3annoyed.png" />
+    <None Include="wwwroot\lib\images\4frustrated.png" />
+    <None Include="wwwroot\lib\images\5angry.png" />
+    <None Include="wwwroot\lib\images\6help.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />

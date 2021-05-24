@@ -1,0 +1,47 @@
+﻿@page
+@model Quokka_App.Pages.StudentEmergencyModel
+@{
+    ViewData["Title"] = "Emergency Contacts";
+}
+
+
+<form method="post">
+    <img src="~/lib/images/sos.png" />
+    <h3>If the matter is an emergency and outside of school hours, please contact one of the following options </h3>
+    <hr /><br />
+    <table>
+        <tr>
+            <th>Contacts</th>
+            <th>Phone</th>
+        </tr>
+        <tr>
+            <td>Kids Help Line</td>
+            <td><a href="tel:+611800551800">1800 55 1800</a></td>
+        </tr>
+        <tr>
+            <td>Youth Beyond Blue</td>
+            <td><a href="tel:+611300224635">1300 22 4635</a></td>
+        </tr>
+        <tr>
+            <td>Homelessness Gateway</td>
+            <td><a href="tel:+611800003308">1800 003 308</a></td>
+        </tr>
+        <tr>
+            <td>Suicide Prevention Line</td>
+            <td><a href="tel:+611300659467">1300 659 467</a></td>
+        </tr>
+        <tr>
+            <td>Lifeline</td>
+            <td><a href="tel:+61131114">13 11 14</a></td>
+        </tr>
+        <tr>
+            <td>SA Police</td>
+            <td><a href="tel:+61131444">131 444</a></td>
+        </tr>
+        <tr>
+            <td>Emergency</td>
+            <td><a href="tel:+61000">000</a></td>
+        </tr>
+    </table>
+
+</form>
