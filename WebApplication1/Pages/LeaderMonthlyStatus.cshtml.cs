@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Quokka_App.Pages
 {
-    public class LeaderWeeklyStatusModel : PageModel
+    public class LeaderMonthlyStatusModel : PageModel
     {
         public void OnGet()
         {
