@@ -12,9 +12,18 @@
 }
 
 
-<form method="post">
-    <div>Good day @UserManager.GetUserAsync(User).Result.FirstName!</div>
-    <a href="/Studenttext" class="btn btn-primary">Add Student</a>
-    <a href="/Studenttext" class="btn btn-primary">View Notification</a>
-    <a href="/Studenttext" class="btn btn-primary">View Student</a>
+<form method="post" class="leaderPageForm">
+    <div class="nameContainer">
+        <h3>
+            Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+            You have total [  ] notifications(s).
+        </h3>
+        <hr style="width:70%;" />
+    </div>
+    <div>
+        <a href="/LeaderViewNotification" class="btn btn-primary leaderBtn">View Notification</a><br />
+        <a href="/LeaderWeeklyStatus" class="btn btn-primary leaderBtn">View Weekly Status</a> <br />
+        <a href="/Studenttext" class="btn btn-primary leaderBtn">View Monthly Status</a><br />
+        <a href="/LeaderList" class="btn btn-primary leaderBtn">View Student</a><br />
+    </div>
 </form>

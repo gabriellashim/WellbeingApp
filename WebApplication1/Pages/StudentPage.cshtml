@@ -11,11 +11,59 @@
 
 
 <form method="post">
-    <div>How are you feeling today @UserManager.GetUserAsync(User).Result.FirstName?</div>
-    <a href="/Studenttext" class="btn btn-primary">Happy Button</a>
-    <a href="/Studenttext" class="btn btn-primary">Okay</a>
-    <a href="/Studenttext" class="btn btn-primary">Annoyed</a>
-    <a href="/Studenttext" class="btn btn-primary">Frustrated</a>
-    <a href="/Studenttext" class="btn btn-primary">Angry</a>
-    <a href="/Studenttext" class="btn btn-primary">I need help</a>
+
+    <!--Emergency Contacts-->
+    <a href="/StudentEmergencyList" class="sosContainer">
+        <img src="~/lib/images/sos.png" style="width:30px; height:30px; vertical-align: middle" />
+        Click here to seek urgent help
+    </a>
+
+    <div class="nameContainer">
+        <h3>
+            Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+            How are you feeling today?
+        </h3>
+    </div>
+
+    <div class="emojiContainer">
+        <div class="row">
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji1">
+                    <img src="~/lib/images/1happy.png" /><br />Happy
+                </a>
+            </div>
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji1">
+                    <img src="~/lib/images/2okay.png" /><br />Okay
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji2">
+                    <img src="~/lib/images/3annoyed.png" /><br /> Annoyed
+                </a>
+            </div>
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji2">
+                    <img src="~/lib/images/4frustrated.png" /><br />Frustrated
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji3">
+                    <img src="~/lib/images/5angry.png" /> <br />Angry
+                </a>
+            </div>
+            <div class="col s6">
+                <a href="/Studenttext" class="btn btn-primary emoji3">
+                    <img src="~/lib/images/6help.png" /> <br />I need help
+                </a>
+            </div>
+        </div>
+    </div>
+
 </form>
+
