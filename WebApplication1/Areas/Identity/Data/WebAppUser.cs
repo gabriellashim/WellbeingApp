@@ -32,8 +32,8 @@ namespace WebApplication1.Areas.Identity.Data
         public string AccountType { get; set; }
 
         //Database representation of leader assigned to student
-        [PersonalData]
-        [Column(TypeName = "nvarchar(100)")]
-        public string AssignedLeader { get; set; }
+        //[PersonalData]
+        //[Column(TypeName = "nvarchar(100)")]
+        //public string AssignedLeader { get; set; }
     }
 }
