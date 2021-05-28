@@ -1,36 +1,70 @@
 ﻿@page
 @model Quokka_App.Pages.LeaderListModel
+
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject UserManager<WebAppUser> UserManager
+
 @{
     ViewData["Title"] = "List";
 }
 
-<div class="text-center>
-    <h1 class="display-4">Student list for leaders</h1>
-    <h2>Student Database</h2>
+<div style="text-align:center;">
+    <h3>View All Students</h3>
+    <h6>You are logged in as @UserManager.GetUserAsync(User).Result.AccountType</h6>
     <hr />
 </div>
 
 
-<table class="table" border="1">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>School ID</th>
-    </tr>
-    @foreach (var i in Model.displayData)
-    {
-        @if (i.AccountType == "Student")
+<table class="striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Student ID</th>
+            <th>Add to me</th>
+            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
+          
+            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+            {
+                <th>Assigned to</th>
+            }
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model.displayData)
         {
-            <tr>
-                <td>@i.FirstName</td>
-                <td>@i.LastName</td>
-                <td>@i.UserName</td>
-                <td>@Html.ActionLink("Add", "Add")</td>
-            </tr>
+            @if (i.AccountType == "Student")
+            {
+        <tr>
+            <td>@i.FirstName</td>
+            <td>@i.LastName</td>
+            <td>@i.UserName</td>
+            <td>@Html.ActionLink("Add", "Add")</td>
+
+            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
+            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+            {
+                <td>
+                    <label for="leaders">Change leader:</label>
+                    <select name="leaders" id="leaders">
+
+                        @foreach (var leader in Model.displayData)
+                        {
+                            @if (leader.AccountType == "Leader")
+                            {
+                                <option value="seniorLeader">@leader.FirstName, @leader.LastName</option>
+                            }
+                        }
+
+                    </select>
+                    <button>Save</button>
+                </td>
+            }
+        </tr>
+            }
         }
-        else 
-        { 
-        
-        }
-    }
+    </tbody>
 </table>

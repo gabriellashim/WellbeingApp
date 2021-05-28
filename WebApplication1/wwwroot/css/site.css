@@ -1,7 +1,59 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-/*StudentPage List*/
+/*CSS for all application 
+    MENU
+    1. Log in Page
+    2. Students
+        2.1 Student Page (feeling selection)
+        2.2 Student Request
+        2.3 Student Text
+        2.4 Student Emergency List
+    3. Leaders
+        3.1 Leader Page (main landing page)
+        3.2 Leader View Notification page
+        3.3 Leader Weekly Status
+        3.4 Leader Monthly Status
+        3.5 Leader List (view all students)
+    4. Footer
+    5. Apply to all pages
+*/
+
+/*---------------------
+    1. Log in Page
+    ------------------------*/
+/*login form top tab design*/
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+div.login-logout-tab li.nav-item {
+    width: 50%;
+}
+
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
+
+div.card-content {
+    padding: 10px 20px;
+}
+
+/*center login form*/
+div.login-form-icon {
+    text-align: center;
+}
+
+/*---------------------
+    2. Students
+    2.1 Student Page (feeling selection)
+    ------------------------*/
 img {
     width: 40px;
     height: 40px;
@@ -35,8 +87,27 @@ img {
 .emoji3 {
     background: rgb(255, 153, 145);
     width: 80%;
+}
 
-/*StudentEmergencyList Page*/
+/*---------------------
+    2.2 Student Request
+    ------------------------*/
+.studentRequestForm1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.studentRequestForm2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/*---------------------
+    2.3 Student Text
+    ------------------------*/
+
+
+/*---------------------
+    2.4 Student Emergency List
+    ------------------------*/
 .emergencyHeader{
     text-align:center;
 }
@@ -49,20 +120,12 @@ form{
     width: 100%;
 }
 
-/*Student Request*/
-.studentRequestForm1 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
-.studentRequestForm2{
-    margin-top:20px;
-    margin-bottom:20px;
-
-}
-
-/*Leader Page*/
-form .leaderPageForm {
+/*---------------------
+    3. Leaders
+    3.1 Leader Page (main landing page)
+------------------------*/
+.leaderPageForm {
     text-align: center;
 }
 .leaderBtn {
@@ -72,64 +135,33 @@ form .leaderPageForm {
     background-color: rgb(156, 156, 156);
     border-style: none;
 }
-/*table*/
-table, th, td {
-    border: none;
-}
-table {
-    width: 100%;
-    display: table;
-}
-table.bordered > thead > tr, table.bordered > tbody > tr {
-    border-bottom: 1px solid #d0d0d0;
-}
-table.striped > tbody > tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
 
-table.striped > tbody > tr > td {
-    border-radius: 0px;
-}
-table.highlight > tbody > tr:hover {
-    background-color: #f2f2f2;
-}
-table.centered thead tr th, table.centered tbody tr td {
-    text-align: center;
-}
-thead {
-    border-bottom: 2px solid #d0d0d0;
-    font-size: 14px;
-}
-td, th {
-    padding: 15px 5px;
-    display: table-cell;
-    text-align: left;
-    vertical-align: middle;
-}
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
+/*---------------------
+    4. Footer
+------------------------*/
 html {
-  font-size: 14px;
-  font-family:Arial;
+    font-size: 14px;
+    font-family: Arial;
+    position: relative;
+    min-height: 100%;
 }
 @media (min-width: 768px) {
   html {
     font-size: 14px;
   }
 }
-
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: "Roboto", sans-serif;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
@@ -143,46 +175,40 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
+/*---------------------
+     5. Apply to all pages
+    ------------------------*/
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+/*Table style*/
+table, th, td {
+    border: none;
 }
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  font-family: "Roboto", sans-serif;
+table {
+    width: 100%;
+    display: table;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    table.bordered > thead > tr, table.bordered > tbody > tr {
+        border-bottom: 1px solid #d0d0d0;
+    }
+    table.striped > tbody > tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+    table.striped > tbody > tr > td {
+        border-radius: 0px;
+    }
+    table.highlight > tbody > tr:hover {
+        background-color: #f2f2f2;
+    }
+    table.centered thead tr th, table.centered tbody tr td {
+        text-align: center;
+    }
+thead {
+    border-bottom: 2px solid #d0d0d0;
+    font-size: 14px;
 }
-
-/*login form top tab design*/
-div.login-logout-tab div.card-header {
-    padding: 0px 0px 12px 0px;
-}
-div.login-logout-tab ul.nav-tabs {
-    margin: 0px 0px -12px 0px;
-}
-div.login-logout-tab li.nav-item {
-    width: 50%;
-}
-div.login-logout-tab a.nav-link {
-    font-size: 25px;
-    color: #495057;
-    text-align: center;
-}
-div.card-content {
-    padding: 10px 20px;
-}
-
-/*center login form*/
-div.login-form-icon {
-    text-align: center;
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
 }
