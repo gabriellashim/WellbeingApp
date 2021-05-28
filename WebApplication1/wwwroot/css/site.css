@@ -36,11 +36,6 @@ img {
     background: rgb(255, 153, 145);
     width: 80%;
 
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-style: none;
-}
-
 /*StudentEmergencyList Page*/
 .emergencyHeader{
     text-align:center;
