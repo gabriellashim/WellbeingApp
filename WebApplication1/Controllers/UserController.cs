@@ -11,13 +11,10 @@ namespace Quokka_App.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly UserManager<WebAppUser> userManager;
         public UserController(UserManager<WebAppUser> userManager) {
             this.userManager = userManager;
         }
-
-
 
         [HttpGet]
         public IActionResult ListUsers()
