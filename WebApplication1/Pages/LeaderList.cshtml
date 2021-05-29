@@ -8,6 +8,9 @@
 
 @{
     ViewData["Title"] = "List";
+    string selectedLeaderID;
+    string assignToMe;
+   
 }
 
 <div style="text-align:center;">
@@ -15,7 +18,8 @@
     <h6>You are logged in as @UserManager.GetUserAsync(User).Result.AccountType</h6>
     <hr />
 </div>
-
+<div>
+</div>
 
 <table class="striped">
     <thead>
@@ -25,46 +29,58 @@
             <th>Student ID</th>
             <th>Add to me</th>
             <!--if user is senior leader, display "Change Leader" button and "Save" button-->
-          
+
             @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
             {
                 <th>Assigned to</th>
             }
-          
+
         </tr>
     </thead>
     <tbody>
+        @if(@UserManager.GetUserAsync(User).Result.AccountType == "leader")
+        {
+        assignToMe = @UserManager.GetUserAsync(User).Result.Id;
+        }
+
         @foreach (var i in Model.displayData)
         {
             @if (i.AccountType == "Student")
             {
-        <tr>
-            <td>@i.FirstName</td>
-            <td>@i.LastName</td>
-            <td>@i.UserName</td>
-            <td>@Html.ActionLink("Add", "Add")</td>
+                <tr>
+                    <td>@i.FirstName</td>
+                    <td>@i.LastName</td>
+                    <td>@i.UserName</td>
 
-            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
-            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
-            {
-                <td>
-                    <label for="leaders">Change leader:</label>
-                    <select name="leaders" id="leaders">
+                    <td>
+                        @if (i.AssignedTo != null)
+                        {@i.AssignedTo }
+                    else
+                    { <a asp-p>Add</a>}
+                    </td>
 
-                        @foreach (var leader in Model.displayData)
-                        {
-                            @if (leader.AccountType == "Leader")
-                            {
-                                <option value="seniorLeader">@leader.FirstName, @leader.LastName</option>
-                            }
-                        }
-
-                    </select>
-                    <button>Save</button>
-                </td>
-            }
-        </tr>
-            }
+                    <!--if user is senior leader, display "Change Leader" button and "Save" button-->
+                    @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+                    {
+                        <td>
+                            <form method="post">
+                                <label for="leaders">Change leader:</label>
+                                <select id="leadersOption" onchange="copy();">
+                                    @foreach (var leader in Model.displayData)
+                                    {
+                                        @if (leader.AccountType == "Leader")
+                                        {
+                                            <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
+                                        }
+                                    }
+                                </select>
+                                <div id="label"></div>
+                                <input type="submit" id="leaderUpdate" value="Update" onclick="getSelectedLeaderID();" />
+                            </form>
+                        </td>
+                    }
+                </tr>
+}
         }
     </tbody>
 </table>
