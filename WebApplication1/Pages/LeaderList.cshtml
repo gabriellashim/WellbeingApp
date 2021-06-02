@@ -47,39 +47,45 @@
         {
             @if (i.AccountType == "Student")
             {
-                <tr>
-                    <td>@i.FirstName</td>
-                    <td>@i.LastName</td>
-                    <td>@i.UserName</td>
+        <tr>
+            <td>@i.FirstName</td>
+            <td>@i.LastName</td>
+            <td>@i.UserName</td>
 
-                    <td>
-                        @if (i.AssignedTo != null)
-                        {@i.AssignedTo }
-                    else
-                    { <a asp-p>Add</a>}
-                    </td>
+            <td>
+                @if (i.AssignedTo != null)
+                {@i.AssignedTo }
+            else
+            { <a asp-p>Add</a>}
+            </td>
 
-                    <!--if user is senior leader, display "Change Leader" button and "Save" button-->
-                    @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
-                    {
-                        <td>
-                            <form method="post">
-                                <label for="leaders">Change leader:</label>
-                                <select id="leadersOption" onchange="copy();">
-                                    @foreach (var leader in Model.displayData)
-                                    {
-                                        @if (leader.AccountType == "Leader")
-                                        {
-                                            <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
-                                        }
-                                    }
-                                </select>
-                                <div id="label"></div>
-                                <input type="submit" id="leaderUpdate" value="Update" onclick="getSelectedLeaderID();" />
-                            </form>
-                        </td>
-                    }
-                </tr>
+
+            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
+            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+            {
+                <td>
+                    <form method="post">
+                        <label for="leaders">Change leader:</label>
+                        <select id="leadersOption" onchange="copy();">
+                            @foreach (var leader in Model.displayData)
+                            {
+                                @if (leader.AccountType == "Leader")
+                                {
+                                    <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
+
+                                }
+                            }
+                        </select>
+                        <div id="label"></div>
+
+                        <a asp-page="./LeaderEditStudent" asp-route-id="@i.Id"> Edit</a>
+
+                        <input type="submit" id="leaderUpdate" value="Update" onclick="getSelectedLeaderID();" />
+
+                    </form>
+                </td>
+            }
+        </tr>
 }
         }
     </tbody>
