@@ -1,5 +1,10 @@
 ﻿@page
 @model Quokka_App.Pages.LeaderListModel
+@using Quokka_App.Model;
+@using WebApplication1.Areas.Identity.Pages.Account
+
+
+
 @{
     ViewData["Title"] = "List";
 }
@@ -9,7 +14,6 @@
     <h2>Student Database</h2>
     <hr />
 </div>
-
 
 <table class="table" border="1">
     <tr>
@@ -26,11 +30,22 @@
                 <td>@i.LastName</td>
                 <td>@i.UserName</td>
                 <td>@Html.ActionLink("Add", "Add")</td>
+                <td>
+                    <form method="post" >
+
+                        <label asp-for="LeaderAssigned.LeaderAssigned"></label>
+                        <input asp-for="LeaderAssigned.LeaderAssigned" class="form-control" />
+                        <span asp-validation-for="LeaderAssigned.LeaderAssigned" class="text-danger"></span>
+                        <button type="submit" asp-route-id="@i.Id" class="btn btn-primary">Register</button>
+                    </form>
+
+                </td>
             </tr>
         }
-        else 
-        { 
-        
-        }
+        else
+        { }
     }
 </table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

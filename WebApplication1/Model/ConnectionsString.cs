@@ -10,10 +10,8 @@ namespace Quokka_App.Model
 {
     public class ConnectionsString : DbContext
     {
-        public ConnectionsString(DbContextOptions<ConnectionsString>options):base(options)
-        {
-
-        }
+        public ConnectionsString(DbContextOptions<ConnectionsString>options) : base(options)
+        {}
         public DbSet<UserClass> AspNetUsers { get; set; }
     }
 }

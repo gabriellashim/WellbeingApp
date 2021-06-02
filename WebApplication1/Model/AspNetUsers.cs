@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Quokka_App.Model
 {
-    public class UserClass
+    public class AspNetUsers
     {
         [Key]
         public string Id { get; set; }
@@ -17,3 +17,4 @@ namespace Quokka_App.Model
         public string LeaderAssigned { get; set; }
     }
 }
+
