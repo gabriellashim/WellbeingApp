@@ -18,7 +18,10 @@ namespace Quokka_App.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Emotion>().ToTable("Emotion");
-            //modelBuilder.Entity<LeadersAssigned>().ToTable("LeadersAssigned");
+            modelBuilder.Entity<LeadersAssigned>().ToTable("LeadersAssigned");
         }
+        //public DbSet<LeadersAssigned> LeadersAssigned { get; set; }
+
+        public DbSet<Quokka_App.Model.LeadersAssigned> LeadersAssigned { get; set; }
     }
 }
