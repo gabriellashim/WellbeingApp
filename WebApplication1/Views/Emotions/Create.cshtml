@@ -13,9 +13,34 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="studentId" class="control-label"></label>
-                <input asp-for="studentId" class="form-control" />
-                <span asp-validation-for="studentId" class="text-danger"></span>
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="happy" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="sad" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="angry" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="emotion2" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="emotion3" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="feeling" class="control-label"></label>
+                <input type="submit" asp-for="feeling" class="form-control" value="emotion4" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="feeling" class="control-label"></label>
