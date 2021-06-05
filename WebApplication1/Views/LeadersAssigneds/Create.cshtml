@@ -1,0 +1,48 @@
+﻿@model Quokka_App.Model.LeadersAssigned
+
+@using Quokka_App.Model;
+@using WebApplication1.Areas.Identity.Pages.Account
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+
+@{
+    ViewData["Title"] = "Leader";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<!---Leader List Page-->
+<form asp-action="Create" class="leaderPageForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h3>
+        Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+        You have total - notifications(s).
+    </h3>
+    <div>
+        <a class="btn btn-primary leaderBtn">View Notification</a><br />
+        <a asp-action="ViewWeekly" class="btn btn-primary leaderBtn">View Weekly Status</a> <br />
+        <a asp-action="ViewMonthly" class="btn btn-primary leaderBtn">View Monthly Status</a><br />
+        <a asp-action="ViewAllStudent" class="btn btn-primary leaderBtn">View Student</a><br />
+    </div>
+    <!---
+        <div class="form-group">
+            <label asp-for="leaderID" class="control-label"></label>
+            <input asp-for="leaderID" class="form-control" />
+            <span asp-validation-for="leaderID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="studentID" class="control-label"></label>
+            <input asp-for="studentID" class="form-control" />
+            <span asp-validation-for="studentID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    -->
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

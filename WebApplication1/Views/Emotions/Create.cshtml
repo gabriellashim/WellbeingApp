@@ -1,0 +1,96 @@
+﻿@model Quokka_App.Model.Emotion
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+@inject UserManager<WebAppUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <!--Emergency Contacts-->
+            <a href="/StudentEmergencyList">
+                <img src="~/lib/images/sos.png" style="width:30px; height:30px; vertical-align: middle" />
+                Click here to seek urgent help
+            </a>
+
+            <h3>
+                Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+                How are you feeling today?
+            </h3>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/1happy.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="happy"  />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/2okay.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="okay" />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/3annoyed.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="annoyed" />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/4frustrated.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="frustrated" />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/5angry.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="angry" />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col s6">
+                            <label asp-for="feeling" class="control-label">
+                                <img src="~/lib/images/6help.png" />
+                            </label>
+                            <input type="submit" asp-for="feeling" class="form-control" value="I need help" />
+                            <span asp-validation-for="feeling" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a asp-action="Edit" asp-route-id="Model.ID">Next</a>
+        </form>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

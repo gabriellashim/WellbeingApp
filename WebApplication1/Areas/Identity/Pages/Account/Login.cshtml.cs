@@ -93,11 +93,11 @@ namespace WebApplication1.Areas.Identity.Pages.Account
 
                     if (_userManager.GetUserAsync(User).Result.AccountType == "Student")
                     {
-                        return LocalRedirect("~/studentpage");
+                        return Redirect("~/Emotions/Create");
                     }
                     else
                     {
-                        return LocalRedirect("~/leaderpage");
+                        return Redirect("~/LeadersAssigneds/Create");
                     }
                 }
                 if (result.RequiresTwoFactor)

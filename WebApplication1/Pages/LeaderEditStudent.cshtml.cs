@@ -25,7 +25,7 @@ namespace Quokka_App.Pages
         public UserClass UserClass { get; set; }
 
         #region snippet_OnGetPost
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(string? id)
         {
             displayData = await _db.AspNetUsers.ToListAsync();
 
@@ -36,7 +36,6 @@ namespace Quokka_App.Pages
 
             UserClass = await _db.AspNetUsers.FindAsync(id);
     
-
             if (UserClass == null)
             {
                 return NotFound();
@@ -44,10 +43,10 @@ namespace Quokka_App.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync(string? id)
         {
             var studentToUpdate = await _db.AspNetUsers.FindAsync(id);
-
+            
             if (studentToUpdate == null)
             {
                 return NotFound();
@@ -57,11 +56,10 @@ namespace Quokka_App.Pages
             if (await TryUpdateModelAsync<UserClass> (
                 studentToUpdate,
                 "student",
-                s => s.FirstName, s => s.LastName, s => s.AssignedTo))
+                s => s.FirstName, s => s.LastName, s => s.LeaderAssigned))
             {
-                _db.AspNetUsers.Update(studentToUpdate);
-                _db.SaveChanges();
-                //await _db.SaveChangesAsync();
+                
+                await _db.SaveChangesAsync();
                 return RedirectToPage("./LeaderList");
             }
             return Page();

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Quokka_App.Model;
 using Microsoft.EntityFrameworkCore;
+using Quokka_App.Data;
 
 namespace WebApplication1
 {
@@ -28,9 +29,16 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ConnectionsString>(options => options.UseSqlServer(Configuration.GetConnectionString("WebAppContextConnection")));
+            //This line of code here is for registration
+            //services.AddDbContext<ConnectionsString>(options => options.UseSqlServer(Configuration.GetConnectionString("WebAppContextConnection")));
+
+            //This line of code here is for emotion table DB
+            services.AddDbContext<LeadersAssignedContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebAppContextConnection")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+
+           //services.AddDatabaseDeveloperPageExceptionFilter();
 
            services.AddMvc().AddRazorPagesOptions(options => {
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
@@ -41,9 +49,6 @@ namespace WebApplication1
                     options.Conventions.AuthorizeFolder("/Areas");
                 }
             );
-
-    
-      
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

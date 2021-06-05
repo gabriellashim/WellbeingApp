@@ -28,18 +28,19 @@
                 <span asp-validation-for="UserClass.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserClass.AssignedTo" class="control-label"></label>
-                <select asp-for="UserClass.AssignedTo" id="leadersOption" class="form-control">
+                <label asp-for="UserClass.LeaderAssigned" class="control-label"></label>
+                <select asp-for="UserClass.LeaderAssigned" id="leadersOption" class="form-control">
                     @foreach (var leader in Model.displayData)
                     {
                         @if (leader.AccountType == "Leader")
                         {
                             <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
-}
+                        }
                     }
-                }
+                    }
                 </select>
-                <span asp-validation-for="UserClass.AssignedTo" class="text-danger"></span>
+
+                <span asp-validation-for="UserClass.LeaderAssigned" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Quokka_App.Model
 {
-    public class UserClass
+    public class AspNetUsers
     {
         [Key]
         public string Id { get; set; }
@@ -17,3 +18,4 @@ namespace Quokka_App.Model
         public string LeaderAssigned { get; set; }
     }
 }
+

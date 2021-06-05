@@ -1,92 +1,49 @@
 ﻿@page
 @model Quokka_App.Pages.LeaderListModel
+@using Quokka_App.Model;
+@using WebApplication1.Areas.Identity.Pages.Account
 
-@using Microsoft.AspNetCore.Identity
-@using WebApplication1.Areas.Identity.Data
-
-@inject UserManager<WebAppUser> UserManager
 
 @{
     ViewData["Title"] = "List";
-    string selectedLeaderID;
-    string assignToMe;
-   
 }
 
-<div style="text-align:center;">
-    <h3>View All Students</h3>
-    <h6>You are logged in as @UserManager.GetUserAsync(User).Result.AccountType</h6>
+<div class="text-center">
+    <h1 class="display-4">Student list for leaders</h1>
+    <h2>Student Database</h2>
     <hr />
 </div>
-<div>
-</div>
 
-<table class="striped">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Student ID</th>
-            <th>Add to me</th>
-            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
-
-            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
-            {
-                <th>Assigned to</th>
-            }
-
-        </tr>
-    </thead>
-    <tbody>
-        @if(@UserManager.GetUserAsync(User).Result.AccountType == "leader")
+<table class="table" border="1">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>School ID</th>
+    </tr>
+    @foreach (var i in Model.displayData)
+    {
+        @if (i.AccountType == "Student")
         {
-        assignToMe = @UserManager.GetUserAsync(User).Result.Id;
-        }
-
-        @foreach (var i in Model.displayData)
-        {
-            @if (i.AccountType == "Student")
-            {
-        <tr>
-            <td>@i.FirstName</td>
-            <td>@i.LastName</td>
-            <td>@i.UserName</td>
-
-            <td>
-                @if (i.AssignedTo != null)
-                {@i.AssignedTo }
-            else
-            { <a asp-p>Add</a>}
-            </td>
-
-
-            <!--if user is senior leader, display "Change Leader" button and "Save" button-->
-            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
-            {
+            <tr>
+                <td>@i.FirstName</td>
+                <td>@i.LastName</td>
+                <td>@i.UserName</td>
+                <td>@Html.ActionLink("Add", "Add")</td>
                 <td>
-                    <form method="post">
-                        <label for="leaders">Change leader:</label>
-                        <select id="leadersOption" onchange="copy();">
-                            @foreach (var leader in Model.displayData)
-                            {
-                                @if (leader.AccountType == "Leader")
-                                {
-                                    <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
-
-                                }
-                            }
-                        </select>
-                        <div id="label"></div>
-
-                        <a asp-page="./LeaderEditStudent" asp-route-id="@i.Id"> Edit</a>
-
-                        <input type="submit" id="leaderUpdate" value="Update" onclick="getSelectedLeaderID();" />
-
+                    <form method="post" >
+                        <label asp-for="LeaderAssigned.LeaderAssigned"></label>
+                        <input asp-for="LeaderAssigned.LeaderAssigned" class="form-control" />
+                        <span asp-validation-for="LeaderAssigned.LeaderAssigned" class="text-danger"></span>
+                        <button type="submit" asp-route-id="@i.Id" class="btn btn-primary">Register</button>
                     </form>
+
                 </td>
-            }
-        </tr>
-}
+            </tr>
         }
-    </tbody>
+        else
+        { }
+    }
 </table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
