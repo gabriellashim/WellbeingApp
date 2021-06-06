@@ -1,0 +1,24 @@
+﻿@model Quokka_App.Model.Emotion
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+@inject UserManager<WebAppUser> UserManager
+
+
+@{
+    ViewData["Title"] = "Student Page";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<!--This page is to show confirmation to students.-->
+
+<div style="text-align:center;">
+    <div class="nameContainer">
+        <h2>
+            Thank you! @UserManager.GetUserAsync(User).Result.FirstName
+        </h2>
+        <h3>Your Wellbeing Leader will contact you shortly.</h3>
+        <img src="~/lib/images/1happy.png" />
+    </div>
+    <div>
+        <a asp-action="Create">Back to Home</a>
+    </div>
+</div>

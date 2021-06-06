@@ -12,6 +12,8 @@ namespace Quokka_App.Model
         public int ID { get; set; }
         public string studentId { get; set; }
         public string feeling { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime date { get; set; }
         public string whenToSee { get; set; }
         public string description { get; set; }
