@@ -43,7 +43,13 @@ namespace Quokka_App.Controllers
             return View(emotion);
         }
 
-        // GET: Emotions/Create
+        // GET: Emotions
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
+        // GET: Emotions/Create (Student Main Page)
         public IActionResult Create()
         {
             return View();
@@ -60,7 +66,7 @@ namespace Quokka_App.Controllers
             {
                 _context.Add(emotion);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", new {emotion.ID});
             }
             return View(emotion);
         }
@@ -111,7 +117,7 @@ namespace Quokka_App.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Confirmation));
             }
             return View(emotion);
         }

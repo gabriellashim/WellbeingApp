@@ -1,78 +1,85 @@
 ﻿@model Quokka_App.Model.Emotion
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+@inject UserManager<WebAppUser> UserManager
 
-@{
-    ViewData["Title"] = "Create";
-}
+@{ ViewData["Title"] = "Student Page";
+    Layout = "/Views/Shared/_Layout.cshtml"; }
 
-<h1>Create</h1>
-
-<h4>Emotion</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="happy" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="sad" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="angry" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="emotion2" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="emotion3" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input type="submit" asp-for="feeling" class="form-control" value="emotion4" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="feeling" class="control-label"></label>
-                <input asp-for="feeling" class="form-control" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="date" class="control-label"></label>
-                <input asp-for="date" class="form-control" />
-                <span asp-validation-for="date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="whenToSee" class="control-label"></label>
-                <input asp-for="whenToSee" class="form-control" />
-                <span asp-validation-for="whenToSee" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<!--This page is for student's interface page.
+    User name and emergeny contact list displays on the top and student allows to select their feelings-->
+<form asp-action="Create">
+    <!--Emergency Contacts-->
+    <a href="/StudentEmergencyList" class="sosContainer">
+        <img src="~/lib/images/sos.png" style="width:30px; height:30px; vertical-align: middle" />
+        Click here to seek urgent help
+    </a>
+    <!--User name display-->
+    <div class="nameContainer">
+        <h3>
+            Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+            How are you feeling today?
+        </h3>
     </div>
-</div>
+    <div class="emojiContainer">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji1">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/1happy.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Happy" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+            <div class="col s6" id="emoji1">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/2okay.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Okay" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji2">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/3annoyed.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Annoyed" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="col s6" id="emoji2">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/4frustrated.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Frustrated" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji3">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/5angry.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Angry" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="col s6" id="emoji3">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/6help.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="I need help" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }
+

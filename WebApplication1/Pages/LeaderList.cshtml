@@ -4,12 +4,11 @@
 @using WebApplication1.Areas.Identity.Pages.Account
 
 
-
 @{
     ViewData["Title"] = "List";
 }
 
-<div class="text-center>
+<div class="text-center">
     <h1 class="display-4">Student list for leaders</h1>
     <h2>Student Database</h2>
     <hr />
@@ -32,7 +31,6 @@
                 <td>@Html.ActionLink("Add", "Add")</td>
                 <td>
                     <form method="post" >
-
                         <label asp-for="LeaderAssigned.LeaderAssigned"></label>
                         <input asp-for="LeaderAssigned.LeaderAssigned" class="form-control" />
                         <span asp-validation-for="LeaderAssigned.LeaderAssigned" class="text-danger"></span>

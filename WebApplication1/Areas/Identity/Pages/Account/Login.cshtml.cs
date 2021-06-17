@@ -89,26 +89,34 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     // controls the user login depending on their roles
-
-
-                    if (_userManager.GetUserAsync(User).Result.AccountType == "Student")
+                    try
                     {
-                        return LocalRedirect("~/studentpage");
+                        if (_userManager.GetUserAsync(User).Result.AccountType == "Student")
+                        {
+                            return Redirect("~/Emotions/Create");
+                        }
+                        else
+                        {
+                            return Redirect("~/LeadersAssigneds/Create");
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        return LocalRedirect("~/leaderpage");
+                        return Redirect("~/");
                     }
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
+
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");

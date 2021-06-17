@@ -1,0 +1,58 @@
+﻿@page
+@model Quokka_App.Pages.LeaderEditStudentModel
+
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject UserManager<WebAppUser> UserManager
+
+@{
+    ViewData["Title"] = "Edit Student";
+
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserClass.Id" />
+
+            <div class="form-group">
+                <label asp-for="UserClass.LastName" class="control-label"></label>
+                <input asp-for="UserClass.LastName" class="form-control" />
+                <span asp-validation-for="UserClass.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserClass.FirstName" class="control-label"></label>
+                <input asp-for="UserClass.FirstName" class="form-control" />
+                <span asp-validation-for="UserClass.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserClass.LeaderAssigned" class="control-label"></label>
+                <select asp-for="UserClass.LeaderAssigned" id="leadersOption" class="form-control">
+                    @foreach (var leader in Model.displayData)
+                    {
+                        @if (leader.AccountType == "Leader")
+                        {
+                            <option name="leaderSelected" value="@leader.Id">@leader.UserName</option>
+                        }
+                    }
+                    }
+                </select>
+
+                <span asp-validation-for="UserClass.LeaderAssigned" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./LeaderList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

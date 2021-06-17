@@ -25,8 +25,38 @@ namespace Quokka_App.Controllers
             return View(await _context.LeadersAssigned.ToListAsync());
         }
 
+        // GET: ViewAllStudent
+        public async Task<IActionResult> ViewAllStudent()
+        {
+            return View(await _context.AspNetUsers.ToListAsync());
+        }
+
+        // GET: ViewWeekly
+        public async Task<IActionResult> ViewWeekly()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
+
+        // GET: ViewNotification
+        public async Task<IActionResult> ViewNotification()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
+
+        // GET: Create
+        public async Task<IActionResult> Create()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
+
+        // GET: ViewMonthly
+        public async Task<IActionResult> ViewMonthly()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
+
         // GET: LeadersAssigneds/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -44,10 +74,10 @@ namespace Quokka_App.Controllers
         }
 
         // GET: LeadersAssigneds/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+            //return View();
+        //}
 
         // POST: LeadersAssigneds/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -58,6 +88,7 @@ namespace Quokka_App.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(leadersAssigned);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -65,15 +96,16 @@ namespace Quokka_App.Controllers
             return View(leadersAssigned);
         }
 
-        // GET: LeadersAssigneds/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        // GET: LeadersAssigneds/ViewAllStudent/Edit
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var leadersAssigned = await _context.LeadersAssigned.FindAsync(id);
+            var leadersAssigned = await _context.AspNetUsers.FindAsync(id);
             if (leadersAssigned == null)
             {
                 return NotFound();
@@ -81,13 +113,14 @@ namespace Quokka_App.Controllers
             return View(leadersAssigned);
         }
 
-        // POST: LeadersAssigneds/Edit/5
+        // POST: LeadersAssigneds/ViewAllStudent/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,leaderID,studentID")] LeadersAssigned leadersAssigned)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName,UserName,AccountType,LeaderAssigned")] AspNewUsers leadersAssigned)
         {
+
             if (id != leadersAssigned.Id)
             {
                 return NotFound();
@@ -95,37 +128,24 @@ namespace Quokka_App.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(leadersAssigned);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LeadersAssignedExists(leadersAssigned.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(leadersAssigned);
+                await _context.SaveChangesAsync();  
+                return RedirectToAction(nameof(ViewAllStudent));
             }
             return View(leadersAssigned);
         }
 
-        // GET: LeadersAssigneds/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: LeadersAssigneds/ViewAllStudent/Delete
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var leadersAssigned = await _context.LeadersAssigned
+            var leadersAssigned = await _context.AspNetUsers
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (leadersAssigned == null)
             {
                 return NotFound();
@@ -137,17 +157,18 @@ namespace Quokka_App.Controllers
         // POST: LeadersAssigneds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var leadersAssigned = await _context.LeadersAssigned.FindAsync(id);
-            _context.LeadersAssigned.Remove(leadersAssigned);
+            var leadersAssigned = await _context.AspNetUsers.FindAsync(id);
+            _context.AspNetUsers.Remove(leadersAssigned);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Create));
         }
 
-        private bool LeadersAssignedExists(int id)
+        private bool LeadersAssignedExists(string id)
         {
             return _context.LeadersAssigned.Any(e => e.Id == id);
         }
+
     }
 }

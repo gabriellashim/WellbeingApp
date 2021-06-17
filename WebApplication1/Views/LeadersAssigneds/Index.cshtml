@@ -1,14 +1,22 @@
 ﻿@model IEnumerable<Quokka_App.Model.LeadersAssigned>
 
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+@inject UserManager<WebAppUser> UserManager
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Welcome Leader";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="nameContainer">
+    <h3>
+        Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+        You have total [  ] notifications(s).
+    </h3>
+    <hr style="width:70%;" />
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -22,20 +30,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.leaderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.studentID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.leaderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.studentID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

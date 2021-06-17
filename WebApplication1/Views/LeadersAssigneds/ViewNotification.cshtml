@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Quokka_App.Model.Emotion>
+
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+
+@{ ViewData["Title"] = "ViewNotification";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    int notificationCount = 0; }
+
+
+<!--This area should pull the notification count from DB and show in the screen-->
+<!--Condition:-->
+<!--The message will only show to those students that is assigned to the leader or vice versa.-->
+<!--if the button in the leaders account has been clicked, turn the emotion notification count to 0-->
+<!--
+    if (aspnetusers.leaderassigned == aspnetusers.my present account name/ID)
+    {
+
+    }
+
+-->
+
+<div class="form-group">
+
+    <div>
+        <h4>NOTIFICATION POSTS</h4>
+        <hr />
+    </div>
+    <!----
+        TODO- Priority -high, low
+        -->
+
+        @foreach (var notification in Model)
+        {
+            @foreach (var user in UserManager.Users)
+            {
+                if (user.LeaderAssigned == @UserManager.GetUserAsync(User).Result.FirstName)
+                {
+                    if (notification.description != null)
+                    {
+                        notificationCount++;
+                            <div class="notificationArea">
+                                <div class="row">
+                                    <div class="col-9" style="text-align:left;">
+                                        <b>@Html.DisplayFor(modelItem => notification.studentId)</b>
+                                    </div>
+                                    <div class="col-3">
+                                        @Html.DisplayFor(modelItem => notification.date)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        When To See
+                                        @Html.DisplayFor(modelItem => notification.whenToSee)
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        Description
+                                        @Html.DisplayFor(modelItem => notification.description)
+                                    </div>
+                                </div>
+                            </div>
+                    }
+                }
+            }
+        }
+    <label id="count">Total: @notificationCount notification(s)</label>
+</div>
+
+
+<style>
+    div{
+        text-align:center;
+    }
+    .notificationArea {
+        width: 70%;
+        height: 80px;
+        background-color: aliceblue;
+        margin: 20px;
+        border-radius: 10px;
+    }
+
+</style>

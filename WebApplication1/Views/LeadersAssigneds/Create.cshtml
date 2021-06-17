@@ -1,37 +1,73 @@
-﻿@model Quokka_App.Model.LeadersAssigned
+﻿@model IEnumerable<Quokka_App.Model.Emotion>
 
-@{
-    ViewData["Title"] = "Create";
+@using Quokka_App.Model;
+@using WebApplication1.Areas.Identity.Pages.Account
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+
+@{ 
+
+    ViewData["Title"] = "Leader";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    int notificationCount = 0;
+
 }
 
-<h1>Create</h1>
 
-<h4>LeadersAssigned</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="leaderID" class="control-label"></label>
-                <input asp-for="leaderID" class="form-control" />
-                <span asp-validation-for="leaderID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="studentID" class="control-label"></label>
-                <input asp-for="studentID" class="form-control" />
-                <span asp-validation-for="studentID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+@foreach (var notification in Model)
+{
+@foreach (var user in UserManager.Users)
+{
+    if (user.LeaderAssigned == @UserManager.GetUserAsync(User).Result.FirstName)
+    {
+        if (notification.description != null)
+        {
+            notificationCount++;
+        }
+    }
+}}
+
+
+
+<!---Leader List Page-->
+<form asp-action="Create" class="leaderPageForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h3>
+        Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+        You have total @notificationCount notifications(s).
+    </h3>
+    <div>
+        <a asp-action="ViewNotification" class="btn btn-primary leaderBtn" onclick="myFunction()">View Notification</a><br />
+        <a asp-action="ViewWeekly" class="btn btn-primary leaderBtn">View Weekly Status</a> <br />
+        <a asp-action="ViewMonthly" class="btn btn-primary leaderBtn">View Monthly Status</a><br />
+        <a asp-action="ViewAllStudent" class="btn btn-primary leaderBtn">View Student</a><br />
     </div>
-</div>
+    <!---
+        <div class="form-group">
+            <label asp-for="leaderID" class="control-label"></label>
+            <input asp-for="leaderID" class="form-control" />
+            <span asp-validation-for="leaderID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="studentID" class="control-label"></label>
+            <input asp-for="studentID" class="form-control" />
+            <span asp-validation-for="studentID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    -->
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+    function myFunction() {
+        @notificationCount = 0;
+    }
+</script>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
