@@ -76,7 +76,6 @@ namespace Quokka_App.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 _context.Add(leadersAssigned);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -8,7 +8,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<!--This page is for student's entering page.
+<!--This page is for student's landing page.
     User name and emergeny contact list displays on the top and student allows to select their feelings-->
 <form asp-action="Create">
     <!--Emergency Contacts-->
@@ -26,53 +26,91 @@
     <div class="emojiContainer">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row" id="emojiRow">
-            <div class="col s6" id="emoji1">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/1happy.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="Happy" />
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="Happy"
+                       style="  background-image: url('../lib/images/1happy.png');
+                                background-color:#cdf2d8;
+                                text-align: left;
+                                margin: 10px;
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                height: 120px;
+                                width: 90%" />
+
                 <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
 
-            <div class="col s6" id="emoji1">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/2okay.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="Okay" />
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="Okay"
+                       style="  background-image: url('../lib/images/2okay.png');
+                                background-color: #cdf2d8;
+                                text-align: left;
+                                margin: 10px;
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                height: 120px;
+                                width: 90%" />
                 <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
         </div>
 
         <div class="row" id="emojiRow">
-            <div class="col s6" id="emoji2">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/3annoyed.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="Annoyed" />
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="Annoyed"
+                       style="background-image: url('../lib/images/3annoyed.png');
+                            background-color: #ffc299;
+                            text-align: left;
+                            margin: 10px;
+                            background-position: right;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            height: 120px;
+                            width: 90%" />
                 <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
-            <div class="col s6" id="emoji2">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/4frustrated.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="Frustrated" />
-                <span asp-validation-for="feeling" class="text-danger"></span>
+
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="Frustrated"
+                       style="  background-image: url('../lib/images/4frustrated.png');
+                                background-color: #ffc299;
+                                text-align: left;
+                                margin: 10px;
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                height: 120px;
+                                width: 90%" />
+               <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
         </div>
 
         <div class="row" id="emojiRow">
-            <div class="col s6" id="emoji3">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/5angry.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="Angry" />
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="Angry"
+                       style="  background-image: url('../lib/images/5angry.png');
+                                background-color: rgba(255, 57, 46, 0.3);
+                                text-align: left;
+                                margin: 10px;
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                height: 120px;
+                                width: 90%" />
                 <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
-            <div class="col s6" id="emoji3">
-                <label asp-for="feeling" class="control-label">
-                    <img src="~/lib/images/6help.png" />
-                </label>
-                <input type="submit" asp-for="feeling" class="form-control" value="I need help" />
+            <div class="col s6">
+                <input type="submit" asp-for="feeling" class="form-control" value="I need help"
+                       style="  background-image: url('../lib/images/6help.png');
+                                 background-color: rgba(255, 57, 46, 0.3);
+                                text-align: left;
+                                margin: 10px;
+                                background-position: right;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                height: 120px;
+                                width: 90%" />
                 <span asp-validation-for="feeling" class="text-danger"></span>
             </div>
         </div>

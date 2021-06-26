@@ -9,7 +9,13 @@
 @{
     ViewData["Title"] = "View Monthly Status";
     Layout = "/Views/Shared/_Layout.cshtml";
+    int currentMonth = @DateTime.Now.Month;
 }
+
+<div style="text-align:center;">
+    <h4>View Monthly - <b> @currentMonth</b> </h4>
+    <hr />
+</div>
 
 <table class="table" border="1">
     <thead>
@@ -29,34 +35,54 @@
             <th>
                 @Html.DisplayNameFor(model => model.description)
             </th>
-            <th></th>
+            <th>
+                Score
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.studentId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.feeling)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.whenToSee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+
+        @if(item.date.Month == @currentMonth) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.feeling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.whenToSee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+
+            @if(item.feeling == "Happy") {
+            <td>5</td>
+            }
+
+            @if(item.feeling == "Okay") {
+            <td>4</td>
+            }
+            @if(item.feeling == "Annoyed") {
+            <td>3</td>
+            }
+            @if(item.feeling == "Frustrated") {
+            <td>2</td>
+            }
+            @if(item.feeling == "Angry") {
+            <td>1</td>
+            }
+            @if(item.feeling == "I need help") {
+            <td>0</td>
+            }
+        </tr>
+        }
         }
     </tbody>
 </table>
@@ -64,3 +90,9 @@
 <div>
     <a asp-action="Create">Back to main</a>
 </div>
+
+<script>
+    function btn_Click() {
+        return currentMonth = @DateTime.Now.Month - 1;
+    }
+</script>
