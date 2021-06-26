@@ -82,7 +82,7 @@ img {
     border: none;
 }
 
-#emoji1 {
+#emoji1 input{
     background: rgb(255, 241, 133);
     margin: 20px;
 }

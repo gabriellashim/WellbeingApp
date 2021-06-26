@@ -8,29 +8,36 @@
 @inject SignInManager<WebAppUser> SignInManager
 @inject UserManager<WebAppUser> UserManager
 
-@{ 
-
+@{
     ViewData["Title"] = "Leader";
     Layout = "/Views/Shared/_Layout.cshtml";
     int notificationCount = 0;
-
+    var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+    var assignedleader = " ";
 }
 
-
-@foreach (var notification in Model)
-{
+<!--Iterate DB model to show how many notifications are there in a leader's account from student-->
 @foreach (var user in UserManager.Users)
 {
-    if (user.LeaderAssigned == @UserManager.GetUserAsync(User).Result.FirstName)
+    if (user.LeaderAssigned != null)
     {
-        if (notification.description != null)
+        assignedleader = user.LeaderAssigned;
+
+        if (assignedleader.Equals(userFirstName))
         {
-            notificationCount++;
+            foreach (var notification in Model)
+            {
+
+                if (user.UserName == notification.studentId)
+                {
+                    notificationCount++;
+                }
+            }
+
+
         }
     }
-}}
-
-
+}
 
 <!---Leader List Page-->
 <form asp-action="Create" class="leaderPageForm">
@@ -67,7 +74,6 @@
         @notificationCount = 0;
     }
 </script>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -10,7 +10,9 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     string teacherName;
 }
-<!--Leader to edit assigned leader-->
+
+<!--Show page where leader can be assigned to students-->
+
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -37,14 +39,19 @@
     </div>
     <div class="form-group">
         <label asp-for="LeaderAssigned" class="control-label">Assign a leader </label>
-            <select id="LeaderAssigned" name="LeaderAssigned">
-                @foreach (var teacher in UserManager.Users)
+        <select id="LeaderAssigned" name="LeaderAssigned">
+
+            <!--Iterate the table and only show available leaders from DB-->>
+            @foreach (var teacher in UserManager.Users)
+            {
+                teacherName = teacher.FirstName;
+                @if (teacher.AccountType.Equals("Leader"))
                 {
-                    teacherName = teacher.FirstName;
-                    @if (teacher.AccountType == "Leader")
-                    {<option value= "@teacherName">@Html.DisplayFor(modelItem => teacher.FirstName)</option>}
+                    <option value="@teacherName">@Html.DisplayFor(modelItem => teacher.FirstName)</option>
                 }
-            </select>
+            }
+
+        </select>
         <span asp-validation-for="LeaderAssigned" class="text-danger"></span>
     </div>
 

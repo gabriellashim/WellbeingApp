@@ -88,10 +88,13 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var userAccountType = await _userManager.FindByNameAsync(Input.SchoolID);
+                    var useAccountType = userAccountType.AccountType;
+
                     // controls the user login depending on their roles
                     try
                     {
-                        if (_userManager.GetUserAsync(User).Result.AccountType == "Student")
+                        if (useAccountType.Equals("Student"))
                         {
                             return Redirect("~/Emotions/Create");
                         }
@@ -100,21 +103,10 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                             return Redirect("~/LeadersAssigneds/Create");
                         }
                     }
-                    catch (Exception e)
+                    catch (NullReferenceException)
                     {
-                        return Redirect("~/");
+                        return Page();
                     }
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
                 }
 
                 else
