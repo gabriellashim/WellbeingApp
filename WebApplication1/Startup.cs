@@ -36,6 +36,9 @@ namespace WebApplication1
             services.AddDbContext<LeadersAssignedContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebAppContextConnection")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
+
+           //services.AddDatabaseDeveloperPageExceptionFilter();
 
 
            //services.AddDatabaseDeveloperPageExceptionFilter();
@@ -72,14 +75,15 @@ namespace WebApplication1
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-
             });
+           
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model Quokka_App.Model.LeadersAssigned
+﻿@model IEnumerable<Quokka_App.Model.Emotion>
 
 @using Quokka_App.Model;
 @using WebApplication1.Areas.Identity.Pages.Account
@@ -11,6 +12,29 @@
 @{
     ViewData["Title"] = "Leader";
     Layout = "/Views/Shared/_Layout.cshtml";
+    int notificationCount = 0;
+    var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+    var assignedleader = " ";
+}
+
+<!--Iterate DB model to show how many notifications are there in a leader's account from student-->
+@foreach (var user in UserManager.Users)
+{
+    if (user.LeaderAssigned != null)
+    {
+        assignedleader = user.LeaderAssigned;
+
+        if (assignedleader.Equals(userFirstName))
+        {
+            foreach (var notification in Model)
+            {
+                if (user.UserName == notification.studentId)
+                {
+                    notificationCount++;
+                }
+            }
+        }
+    }
 }
 
 <!---Leader List Page-->
@@ -22,6 +46,10 @@
     </h3>
     <div>
         <a class="btn btn-primary leaderBtn">View Notification</a><br />
+        You have total @notificationCount notifications(s).
+    </h3>
+    <div>
+        <a asp-action="ViewNotification" class="btn btn-primary leaderBtn" onclick="myFunction()">View Notification</a><br />
         <a asp-action="ViewWeekly" class="btn btn-primary leaderBtn">View Weekly Status</a> <br />
         <a asp-action="ViewMonthly" class="btn btn-primary leaderBtn">View Monthly Status</a><br />
         <a asp-action="ViewAllStudent" class="btn btn-primary leaderBtn">View Student</a><br />
@@ -43,6 +71,11 @@
     -->
 </form>
 
+<script>
+    function myFunction() {
+        @notificationCount = 0;
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -36,6 +36,20 @@
     <div class="form-group">
         <label asp-for="LeaderAssigned" class="control-label"></label>
         <input asp-for="LeaderAssigned" class="form-control" />
+        <label asp-for="LeaderAssigned" class="control-label">Assign a leader </label>
+        <select id="LeaderAssigned" name="LeaderAssigned">
+
+            <!--Iterate the table and only show available leaders from DB-->>
+            @foreach (var teacher in UserManager.Users)
+            {
+                teacherName = teacher.FirstName;
+                @if (teacher.AccountType.Equals("Leader"))
+                {
+                    <option value="@teacherName">@Html.DisplayFor(modelItem => teacher.FirstName)</option>
+                }
+            }
+
+        </select>
         <span asp-validation-for="LeaderAssigned" class="text-danger"></span>
     </div>
 

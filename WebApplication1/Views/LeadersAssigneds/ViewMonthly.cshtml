@@ -17,6 +17,7 @@
     <hr />
 </div>
 
+<!--Show table of previous reports of the students-->>
 <table class="table" border="1">
     <thead>
         <tr>
@@ -83,6 +84,28 @@
             }
         </tr>
         }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.studentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.feeling)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.whenToSee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -96,3 +119,4 @@
         return currentMonth = @DateTime.Now.Month - 1;
     }
 </script>
+</div>

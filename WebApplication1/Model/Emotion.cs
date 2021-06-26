@@ -17,5 +17,6 @@ namespace Quokka_App.Model
         public DateTime date { get; set; }
         public string whenToSee { get; set; }
         public string description { get; set; }
+        public int notifyLeader { get; set; }
     }
 }

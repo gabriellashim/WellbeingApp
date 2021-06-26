@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quokka_App.Data;
 
 namespace Quokka_App.Migrations
 {
     [DbContext(typeof(LeadersAssignedContext))]
-    partial class LeadersAssignedContextModelSnapshot : ModelSnapshot
+    [Migration("20210616070006_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,16 +53,6 @@ namespace Quokka_App.Migrations
 
             modelBuilder.Entity("Quokka_App.Model.LeadersAssigned", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("leaderID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("studentID")
-                        .HasColumnType("int");
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
@@ -74,6 +66,7 @@ namespace Quokka_App.Migrations
 
                     b.ToTable("LeadersAssigned");
                 });
+
             modelBuilder.Entity("Quokka_App.Model.NewAspNetUsers", b =>
                 {
                     b.Property<string>("Id")

@@ -37,6 +37,17 @@ namespace Quokka_App.Controllers
             return View(await _context.Emotion.ToListAsync());
         }
 
+        // GET: ViewNotification
+        public async Task<IActionResult> ViewNotification()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
+
+        // GET: Create
+        public async Task<IActionResult> Create()
+        {
+            return View(await _context.Emotion.ToListAsync());
+        }
         // GET: ViewMonthly
         public async Task<IActionResult> ViewMonthly()
         {
@@ -62,10 +73,17 @@ namespace Quokka_App.Controllers
         }
 
         // GET: LeadersAssigneds/Create
+<<<<<<< HEAD
         public IActionResult Create()
         {
             return View();
         }
+=======
+        //public IActionResult Create()
+        //{
+            //return View();
+        //}
+>>>>>>> 730b8762a957518028e4f6dfd57b91ef72e78785
 
         // POST: LeadersAssigneds/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -76,6 +94,10 @@ namespace Quokka_App.Controllers
         {
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 730b8762a957518028e4f6dfd57b91ef72e78785
                 _context.Add(leadersAssigned);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -105,7 +127,11 @@ namespace Quokka_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName,UserName,AccountType,LeaderAssigned")] AspNetUsers leadersAssigned)
+=======
+        public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName,UserName,AccountType,LeaderAssigned")] AspNewUsers leadersAssigned)
+>>>>>>> 730b8762a957518028e4f6dfd57b91ef72e78785
         {
 
             if (id != leadersAssigned.Id)
