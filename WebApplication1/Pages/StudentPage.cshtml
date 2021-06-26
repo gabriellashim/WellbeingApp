@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @using WebApplication1.Areas.Identity.Data
 
+
 @inject SignInManager<WebAppUser> SignInManager
 @inject UserManager<WebAppUser> UserManager
 @{
@@ -25,11 +26,12 @@
         </h3>
     </div>
 
-    <div class="emojiContainer">
-        <div class="row">
-            <div class="col s6">
-                <a href="/Studenttext" class="btn btn-primary emoji1">
+    <div class="emojiContainer" asp-for="@Model.Emotions">
+        <div class="row" asp-for="@Model.Emotions">
+            <div class="col s6" asp-for="@Model.Emotions">
+                <a href="/Studenttext" class="btn btn-primary emoji1" asp-for="@Model.Emotions" value="Happy">
                     <img src="~/lib/images/1happy.png" /><br />Happy
+                    <span asp-validation-for="@Model.Emotions" class="text-danger"></span>
                 </a>
             </div>
             <div class="col s6">

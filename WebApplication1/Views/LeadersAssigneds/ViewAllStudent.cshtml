@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Quokka_App.Model.AspNewUsers>
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+
+@{
+    ViewData["Title"] = "View Students";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<!--Show table list of students, gives additional function for all senior leader/admin-->
+
+<div style="text-align:center;">
+    <h4>View All Students</h4>
+    <h6>You are logged in as @UserManager.GetUserAsync(User).Result.AccountType</h6>
+    <hr />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaderAssigned)
+            </th>
+
+            @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+            {
+                <th>Edit</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.AccountType == "Student")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaderAssigned)
+                    </td>
+
+                    @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Create">Back to main</a>
+</div>
+
+

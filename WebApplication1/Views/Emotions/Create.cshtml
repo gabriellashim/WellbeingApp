@@ -1,0 +1,92 @@
+﻿@model Quokka_App.Model.Emotion
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+@inject UserManager<WebAppUser> UserManager
+
+@{ ViewData["Title"] = "Student Page";
+   Layout = "/Pages/Shared/_Layout.cshtml";
+   var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+    }
+
+<!--Student's default page. User name and emergeny contact list displays on the top and student allows to select their feelings-->
+
+<form asp-action="Create">
+    <!--Emergency Contacts-->
+    <a href="/StudentEmergencyList" class="sosContainer">
+        <img src="~/lib/images/sos.png" style="width:30px; height:30px; vertical-align: middle" />
+        Click here to seek urgent help
+    </a>
+    <!--User name display-->
+    <div class="nameContainer">
+        <h3>
+            Hi,
+            @if (userFirstName != null)
+            {
+                @userFirstName;
+            }
+            How are you feeling today?
+        </h3>
+    </div>
+
+    <div class="emojiContainer">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji1">
+                <input type="image" src="~/lib/images/1happy.png" 
+                        asp-for="feeling" name="Happy" value="Happy"
+                       alt="submit"
+                       class="form-control" style="height:100px;width:100px;" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+
+            <div class="col s6" id="emoji1">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/2okay.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Okay" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji2">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/3annoyed.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Annoyed" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="col s6" id="emoji2">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/4frustrated.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Frustrated" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row" id="emojiRow">
+            <div class="col s6" id="emoji3">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/5angry.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="Angry" />
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+            <div class="col s6" id="emoji3">
+                <label asp-for="feeling" class="control-label">
+                    <img src="~/lib/images/6help.png" />
+                </label>
+                <input type="submit" asp-for="feeling" class="form-control" value="I need help"/>
+                <span asp-validation-for="feeling" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+

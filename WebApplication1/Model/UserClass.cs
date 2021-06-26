@@ -15,7 +15,6 @@ namespace Quokka_App.Model
         public string UserName { get; set; }
         public string AccountType { get; set; }
         public string AssignedTo { get; set; }
-
-
+        public string LeaderAssigned { get; set; }
     }
 }

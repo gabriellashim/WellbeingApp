@@ -1,0 +1,64 @@
+﻿@model Quokka_App.Model.AspNewUsers
+@using Microsoft.AspNetCore.Identity
+@using WebApplication1.Areas.Identity.Data
+
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<!--IMPORTANT-->
+<!--Show Delete page. Admin to delete a record from database-->
+
+<div style="text-align:center;">
+    <h4>Delete Students</h4>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaderAssigned)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.AccountType)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LeaderAssigned)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Create">Back to Home</a>
+</form>
+

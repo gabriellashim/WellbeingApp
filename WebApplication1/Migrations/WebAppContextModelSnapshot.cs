@@ -16,7 +16,7 @@ namespace WebApplication1.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -180,6 +180,9 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LeaderAssigned")
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")

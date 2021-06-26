@@ -65,6 +65,10 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             [Display(Name = "AccountType")]
             public string AccountType { get; set; }
 
+            [DataType(DataType.Text)]
+            [Display(Name = "LeaderAssigned")]
+            public string LeaderAssigned { get; set; }
+
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -93,12 +97,11 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebAppUser { UserName = Input.SchoolID, FirstName = Input.FirstName, LastName = Input.LastName, AccountType = Request.Form["AccountType"]};
+                var user = new WebAppUser { UserName = Input.SchoolID, FirstName = Input.FirstName, LastName = Input.LastName, AccountType = Request.Form["AccountType"], LeaderAssigned = Input.LeaderAssigned};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

@@ -9,6 +9,8 @@ for details on configuring this project to bundle and minify static web assets. 
         2.2 Student Request
         2.3 Student Text
         2.4 Student Emergency List
+
+        2.3 Student Emergency List
     3. Leaders
         3.1 Leader Page (main landing page)
         3.2 Leader View Notification page
@@ -55,34 +57,32 @@ div.login-form-icon {
     2.1 Student Page (feeling selection)
     ------------------------*/
 img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
+
 .sosContainer {
     color: rgb(255, 38, 38);
     text-decoration: none;
 }
-.nameContainer{
+
+.nameContainer {
     margin-top: 20px;
 }
+
 .emojiContainer {
     background: rgb(227, 227, 227);
     border-radius: 5px;
     text-align: center;
 }
-.emoji1 {
-    background: rgb(255, 241, 133);
-    width: 80%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-style: none;
+
+#emojiRow {
+    margin: 0px;
 }
-.emoji2 {
-    background: rgb(255, 192, 46);
-    width: 80%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-style: none;
+
+.emojiContainer input {
+    background: transparent;
+    border: none;
 }
 .emoji3 {
     background: rgb(255, 153, 145);
@@ -110,16 +110,57 @@ img {
     ------------------------*/
 .emergencyHeader{
     text-align:center;
+
+
+#emoji1 input{
+    background: rgb(255, 241, 133);
+    margin: 20px;
 }
+
+#emoji2 {
+    background: rgb(255, 192, 46);
+    margin: 20px;
+}
+
+#emoji3 {
+    background: rgb(255, 153, 145);
+    margin: 20px;
+}
+
+
+/*---------------------
+    2.2 Student Request
+    ------------------------*/
+.studentRequestForm1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.studentRequestForm2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.requestContainer input {
+    background: transparent;
+    border: none;
+}
+
+/*---------------------
+    2.3 Student Emergency List
+    ------------------------*/
+.emergencyHeader {
+    text-align: center;
+}
+
 .emergencyHeader p {
     color: rgb(255, 38, 38);
-    text-align:center;
+    text-align: center;
 }
 
-form{
+form {
     width: 100%;
 }
-
 
 /*---------------------
     3. Leaders
@@ -128,6 +169,7 @@ form{
 .leaderPageForm {
     text-align: center;
 }
+
 .leaderBtn {
     margin-top: 10px;
     width: 60%;
@@ -136,6 +178,16 @@ form{
     border-style: none;
 }
 
+
+/*---------------------
+    3.2 Leader View Notification page
+    ------------------------*/
+.notificationArea{
+    width : 70%;
+    background-color: aliceblue;
+    margin: 20px;
+    border-radius:10px;
+}
 /*---------------------
     4. Footer
 ------------------------*/
@@ -144,11 +196,27 @@ html {
     font-family: Arial;
     position: relative;
     min-height: 100%;
+
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 14px;
-  }
+    html {
+        font-size: 14px;
+    }
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: "Roboto", sans-serif;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 body {
     /* Margin bottom by footer height */
@@ -163,17 +231,20 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
+
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 /*---------------------
      5. Apply to all pages
@@ -183,6 +254,9 @@ button.accept-policy {
 table, th, td {
     border: none;
 }
+
+
+
 table {
     width: 100%;
     display: table;
@@ -202,10 +276,34 @@ table {
     table.centered thead tr th, table.centered tbody tr td {
         text-align: center;
     }
+
+
+    table.bordered > thead > tr, table.bordered > tbody > tr {
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    table.striped > tbody > tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    table.striped > tbody > tr > td {
+        border-radius: 0px;
+    }
+
+    table.highlight > tbody > tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    table.centered thead tr th, table.centered tbody tr td {
+        text-align: center;
+    }
+
 thead {
     border-bottom: 2px solid #d0d0d0;
     font-size: 14px;
 }
+
+
 td, th {
     padding: 15px 5px;
     display: table-cell;
