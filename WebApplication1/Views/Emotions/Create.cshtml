@@ -4,7 +4,9 @@
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "Student Page";
-    Layout = "/Pages/Shared/_Layout.cshtml"; }
+   Layout = "/Pages/Shared/_Layout.cshtml";
+   var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+    }
 
 <!--Student's default page. User name and emergeny contact list displays on the top and student allows to select their feelings-->
 
@@ -17,7 +19,11 @@
     <!--User name display-->
     <div class="nameContainer">
         <h3>
-            Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+            Hi,
+            @if (userFirstName != null)
+            {
+                @userFirstName;
+            }
             How are you feeling today?
         </h3>
     </div>

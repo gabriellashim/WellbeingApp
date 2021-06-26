@@ -15,7 +15,6 @@
 
 }
 
-
 <!--This area should pull the notification count from DB and show in the screen-->
 <!--Condition:-->
 <!--The message will only show to those students that is assigned to the leader or vice versa.-->
@@ -33,24 +32,18 @@
         if (user.LeaderAssigned != null)
         {
             assignedleader = user.LeaderAssigned;
-
             if (assignedleader.Equals(userFirstName))
             {
-                foreach (var notification in Model) 
+                foreach (var notification in Model)
                 {
-
-                    if (user.UserName == notification.studentId) 
+                    if (user.UserName.Equals(notification.studentId))
                     {
                         notificationCount++;
                     }
                 }
-
-
             }
         }
     }
-
-
 
     @foreach (var notification in Model)
     {
@@ -78,12 +71,8 @@
                     </div>
                 </div>
             </div>
-
         }
-    
     }
-
-
     <label id="count">Total: @notificationCount notification(s)</label>
 </div>
 
