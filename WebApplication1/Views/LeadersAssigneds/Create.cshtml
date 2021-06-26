@@ -1,4 +1,3 @@
-﻿@model Quokka_App.Model.LeadersAssigned
 ﻿@model IEnumerable<Quokka_App.Model.Emotion>
 
 @using Quokka_App.Model;
@@ -37,38 +36,55 @@
     }
 }
 
-<!---Leader List Page-->
+<!---Leader's landing Page-->
 <form asp-action="Create" class="leaderPageForm">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <h3>
-        Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
-        You have total - notifications(s).
-    </h3>
-    <div>
-        <a class="btn btn-primary leaderBtn">View Notification</a><br />
-        You have total @notificationCount notifications(s).
-    </h3>
-    <div>
-        <a asp-action="ViewNotification" class="btn btn-primary leaderBtn" onclick="myFunction()">View Notification</a><br />
-        <a asp-action="ViewWeekly" class="btn btn-primary leaderBtn">View Weekly Status</a> <br />
-        <a asp-action="ViewMonthly" class="btn btn-primary leaderBtn">View Monthly Status</a><br />
-        <a asp-action="ViewAllStudent" class="btn btn-primary leaderBtn">View Student</a><br />
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h3>
+                Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+                You have total @notificationCount notifications(s).
+            </h3>
+        </div>
     </div>
-    <!---
-        <div class="form-group">
-            <label asp-for="leaderID" class="control-label"></label>
-            <input asp-for="leaderID" class="form-control" />
-            <span asp-validation-for="leaderID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="studentID" class="control-label"></label>
-            <input asp-for="studentID" class="form-control" />
-            <span asp-validation-for="studentID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    -->
+
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a asp-action="ViewNotification" class="btn btn-primary btn-lg leaderBtn" onclick="myFunction()">
+                        <i class="far fa-bell"></i>
+                        View Notifications
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a asp-action="ViewWeekly" class="btn btn-primary btn-lg leaderBtn">
+                        <i class="fas fa-user-clock"></i>
+                        View Weekly Status
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a asp-action="ViewMonthly" class="btn btn-primary btn-lg leaderBtn">
+                        <i class="far fa-calendar-alt"></i>
+                        View Monthly Status
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a asp-action="ViewAllStudent" class="btn btn-primary btn-lg leaderBtn">
+                        <i class="fas fa-users"></i>
+                        View Student
+                    </a>
+                </div>
+            </div>
+
 </form>
 
 <script>
@@ -76,6 +92,7 @@
         @notificationCount = 0;
     }
 </script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

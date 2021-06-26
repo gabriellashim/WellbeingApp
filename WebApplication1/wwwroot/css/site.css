@@ -7,8 +7,6 @@ for details on configuring this project to bundle and minify static web assets. 
     2. Students
         2.1 Student Page (feeling selection)
         2.2 Student Request
-        2.3 Student Text
-        2.4 Student Emergency List
         2.3 Student Emergency List
     3. Leaders
         3.1 Leader Page (main landing page)
@@ -20,51 +18,41 @@ for details on configuring this project to bundle and minify static web assets. 
     5. Apply to all pages
 */
 
-@media (min-height: 500px) and (min-width: 580px) {
-
-    /*---------------------
+/*---------------------
     1. Log in Page
     ------------------------*/
-    /*login form top tab design*/
-    div.login-logout-tab div.card-header {
-        padding: 0px 0px 12px 0px;
-    }
+/*login form top tab design*/
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
+}
 
-    div.login-logout-tab ul.nav-tabs {
-        margin: 0px 0px -12px 0px;
-    }
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
 
-    div.login-logout-tab li.nav-item {
-        width: 50%;
-    }
+div.login-logout-tab li.nav-item {
+    width: 50%;
+}
 
-    div.login-logout-tab a.nav-link {
-        font-size: 25px;
-        color: #495057;
-        text-align: center;
-    }
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
 
-    div.card-content {
-        padding: 10px 20px;
-    }
+div.card-content {
+    padding: 10px 20px;
+}
 
-    /*center login form*/
-    div.login-form-icon {
-        text-align: center;
-    }
+/*center login form*/
+div.login-form-icon {
+    text-align: center;
+}
 
-    /*---------------------
+/*---------------------
     2. Students
     2.1 Student Page (feeling selection)
     ------------------------*/
-    .sosContainer {
-        color: rgb(255, 38, 38);
-        text-decoration: none;
-    }
-
-    .nameContainer {
-        margin-top: 20px;
-    }
 img {
     width: 50px;
     height: 50px;
@@ -92,138 +80,6 @@ img {
 .emojiContainer input {
     background: transparent;
     border: none;
-}
-.emoji3 {
-    background: rgb(255, 153, 145);
-    width: 80%;
-}
-
-    .emojiContainer {
-        background: rgb(227, 227, 227);
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    /*---------------------
-    2.2 Student Request
-    ------------------------*/
-    .studentRequestForm1 {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .studentRequestForm2 {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .requestContainer input {
-        background: transparent;
-        border: none;
-    }
-
-    /*---------------------
-    2.3 Student Emergency List
-    ------------------------*/
-    .emergencyHeader {
-        text-align: center;
-    }
-
-        .emergencyHeader p {
-            color: rgb(255, 38, 38);
-            text-align: center;
-        }
-
-    form {
-        width: 100%;
-    }
-
-    /*---------------------
-    3. Leaders
-    3.1 Leader Page (main landing page)
-------------------------*/
-    .leaderPageForm {
-        text-align: center;
-    }
-
-    .leaderBtn {
-        margin-top: 10px;
-        width: 60%;
-        height: 40px;
-        background-color: rgb(156, 156, 156);
-        border-style: none;
-    }
-
-    /*---------------------
-    4. Footer
-------------------------*/
-    html {
-        font-size: 14px;
-        font-family: Arial;
-        position: relative;
-        min-height: 100%;
-    }
-
-    @media (min-width: 768px) {
-        html {
-            font-size: 14px;
-        }
-    }
-
-    body {
-        /* Margin bottom by footer height */
-        margin-bottom: 60px;
-        font-family: "Roboto", sans-serif;
-    }
-
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        white-space: nowrap;
-        line-height: 60px; /* Vertically center the text there */
-    }
-
-    .border-top {
-        border-top: 1px solid #e5e5e5;
-    }
-
-    .border-bottom {
-        border-bottom: 1px solid #e5e5e5;
-    }
-
-    .box-shadow {
-        box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-    }
-
-    button.accept-policy {
-        font-size: 1rem;
-        line-height: inherit;
-    }
-    /*---------------------
-     5. Apply to all pages
-    ------------------------*/
-
-    /*Table style*/
-    table, th, td {
-        border: none;
-.emergencyHeader{
-    text-align:center;
-
-
-#emoji1 input{
-    background: rgb(255, 241, 133);
-    margin: 20px;
-}
-
-#emoji2 {
-    background: rgb(255, 192, 46);
-    margin: 20px;
-}
-
-#emoji3 {
-    background: rgb(255, 153, 145);
-    margin: 20px;
 }
 
 
@@ -264,24 +120,21 @@ form {
 /*---------------------
     3. Leaders
     3.1 Leader Page (main landing page)
+}
 ------------------------*/
 .leaderPageForm {
     text-align: center;
 }
 
 .leaderBtn {
-    margin-top: 10px;
-    width: 60%;
-    height: 40px;
-    background-color: rgb(156, 156, 156);
-    border-style: none;
+    height: 60px;
+    min-width: 100px !important;
 }
 
-
 /*---------------------
-    3.2 Leader View Notification page
-    ------------------------*/
-.notificationArea{
+3.2 Leader View Notification page
+------------------------*/
+    .notificationArea{
     width : 70%;
     background-color: aliceblue;
     margin: 20px;
@@ -295,7 +148,6 @@ html {
     font-family: Arial;
     position: relative;
     min-height: 100%;
-
 }
 
 @media (min-width: 768px) {
@@ -317,18 +169,7 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    font-family: "Roboto", sans-serif;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
-}
+
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
@@ -354,57 +195,11 @@ table, th, td {
     border: none;
 }
 
-
-
 table {
     width: 100%;
     display: table;
 }
-    table.bordered > thead > tr, table.bordered > tbody > tr {
-        border-bottom: 1px solid #d0d0d0;
-    }
-    table.striped > tbody > tr:nth-child(odd) {
-        background-color: #f2f2f2;
-    }
 
-    table {
-        width: 100%;
-        display: table;
-    }
-
-        table.bordered > thead > tr, table.bordered > tbody > tr {
-            border-bottom: 1px solid #d0d0d0;
-        }
-
-        table.striped > tbody > tr:nth-child(odd) {
-            background-color: #f2f2f2;
-        }
-
-        table.striped > tbody > tr > td {
-            border-radius: 0px;
-        }
-
-        table.highlight > tbody > tr:hover {
-            background-color: #f2f2f2;
-        }
-
-        table.centered thead tr th, table.centered tbody tr td {
-            text-align: center;
-        }
-
-    thead {
-        border-bottom: 2px solid #d0d0d0;
-        font-size: 14px;
-    }
-
-    td, th {
-        padding: 15px 5px;
-        display: table-cell;
-        text-align: left;
-        vertical-align: middle;
-    }
-
-}
     table.bordered > thead > tr, table.bordered > tbody > tr {
         border-bottom: 1px solid #d0d0d0;
     }
@@ -429,7 +224,6 @@ thead {
     border-bottom: 2px solid #d0d0d0;
     font-size: 14px;
 }
-
 
 td, th {
     padding: 15px 5px;

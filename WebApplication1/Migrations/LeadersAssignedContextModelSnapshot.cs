@@ -51,16 +51,6 @@ namespace Quokka_App.Migrations
 
             modelBuilder.Entity("Quokka_App.Model.LeadersAssigned", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("leaderID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("studentID")
-                        .HasColumnType("int");
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
@@ -74,6 +64,7 @@ namespace Quokka_App.Migrations
 
                     b.ToTable("LeadersAssigned");
                 });
+
             modelBuilder.Entity("Quokka_App.Model.NewAspNetUsers", b =>
                 {
                     b.Property<string>("Id")

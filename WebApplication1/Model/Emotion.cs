@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Quokka_App.Model
 {
@@ -18,5 +19,6 @@ namespace Quokka_App.Model
         public string whenToSee { get; set; }
         public string description { get; set; }
         public int notifyLeader { get; set; }
+
     }
 }

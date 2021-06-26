@@ -1,4 +1,4 @@
-﻿@model Quokka_App.Model.AspNetUsers
+﻿@model Quokka_App.Model.AspNewUsers
 @using Microsoft.AspNetCore.Identity
 @using WebApplication1.Areas.Identity.Data
 
@@ -7,12 +7,13 @@
     ViewData["Title"] = "Delete";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
+
 <!--IMPORTANT-->
 <!--Show Delete page. Admin to delete a record from database-->
+
 <div style="text-align:center;">
     <h4>Delete Students</h4>
 </div>
-
 
 <table class="table">
     <thead>
@@ -43,7 +44,7 @@
                 @Html.DisplayFor(model => model.LastName)
             </td>
             <td>
-            @Html.DisplayFor(model => model.UserName)
+                @Html.DisplayFor(model => model.UserName)
             </td>
             <td>
                 @Html.DisplayFor(model => model.AccountType)
@@ -60,4 +61,4 @@
     <input type="submit" value="Delete" class="btn btn-danger" /> |
     <a asp-action="Create">Back to Home</a>
 </form>
-                
+

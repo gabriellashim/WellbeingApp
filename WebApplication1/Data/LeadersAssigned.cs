@@ -17,7 +17,7 @@ namespace Quokka_App.Data
         public DbSet<Emotion> Emotion { get; set; }
         //public DbSet<LeadersAssigned> LeadersAssigned { get; set; }
         public DbSet<UserClass> UserClass { get; set; }
-        public DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public DbSet<AspNewUsers> AspNetUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

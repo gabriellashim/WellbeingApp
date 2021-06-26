@@ -19,11 +19,6 @@ namespace Quokka_App.Controllers
             _context = context;
         }
 
-        // GET: Emotions
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Emotion.ToListAsync());
-        }
 
         // GET: Emotions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -148,7 +143,7 @@ namespace Quokka_App.Controllers
             var emotion = await _context.Emotion.FindAsync(id);
             _context.Emotion.Remove(emotion);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Create));
         }
 
         private bool EmotionExists(int id)

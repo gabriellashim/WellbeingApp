@@ -13,10 +13,3 @@ function ShowAndHideDiv() {
     }
 }
 
-//function getSelectedLeaderID() is used in LeaderList.cshtml to get selected option value
-
-function getSelectedLeaderID() {
-
-    document.getElementById("label").innerHTML = document.getElementById("leadersOption").value;
-
-}

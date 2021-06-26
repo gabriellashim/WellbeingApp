@@ -58,12 +58,6 @@ namespace Quokka_App.Pages
                 "student",
                 s => s.FirstName, s => s.LastName, s => s.LeaderAssigned))
             {
-                _db.AspNetUsers.Update(studentToUpdate);
-                _db.SaveChanges();
-                //await _db.SaveChangesAsync();
-
-                s => s.FirstName, s => s.LastName, s => s.LeaderAssigned))
-            {
                 
                 await _db.SaveChangesAsync();
                 return RedirectToPage("./LeaderList");

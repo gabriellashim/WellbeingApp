@@ -94,7 +94,6 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                     // controls the user login depending on their roles
                     try
                     {
-                        return Redirect("~/Emotions/Create");
                         if (useAccountType.Equals("Student"))
                         {
                             return Redirect("~/Emotions/Create");
@@ -106,7 +105,6 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                     }
                     catch (NullReferenceException)
                     {
-                        return Redirect("~/LeadersAssigneds/Create");
                         return Page();
                     }
                 }
