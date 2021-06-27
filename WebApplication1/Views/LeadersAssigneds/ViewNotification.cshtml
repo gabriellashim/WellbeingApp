@@ -10,7 +10,7 @@
     Layout = "/Pages/Shared/_Layout.cshtml";
     int notificationCount = 0;
 
-    var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+    var userFirstName = UserManager.GetUserAsync(User).Result.FirstName;
     var assignedleader = " "; }
 
 <!--This area should pull the notification count from DB and show in the screen-->

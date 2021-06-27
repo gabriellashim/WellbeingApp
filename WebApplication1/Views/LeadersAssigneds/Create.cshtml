@@ -9,10 +9,11 @@
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "Leader";
-                Layout = "/Pages/Shared/_Layout.cshtml";
-                int notificationCount = 0;
-                var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
-                var assignedleader = " "; }
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    int notificationCount = 0;
+
+    var userFirstName = UserManager.GetUserAsync(User).Result.FirstName;
+    var assignedleader = " "; }
 
 <!--Iterate DB model to show how many notifications are there in a leader's account from student-->
 @foreach (var user in UserManager.Users)
@@ -27,6 +28,7 @@
             {
                 if (user.UserName == notification.studentId)
                 {
+
                     notificationCount++;
                 }
             }
@@ -41,7 +43,7 @@
     <div class="row mb-3">
         <div class="col-md-12">
             <h3>
-                Hi, @UserManager.GetUserAsync(User).Result.FirstName <br />
+                Hi, @userFirstName <br />
                 You have total @notificationCount notifications(s).
             </h3>
         </div>

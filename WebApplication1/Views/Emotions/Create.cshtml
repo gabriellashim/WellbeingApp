@@ -5,7 +5,7 @@
 
 @{ ViewData["Title"] = "Student Page";
     Layout = "/Pages/Shared/_Layout.cshtml";
-    var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName; }
+    var userFirstName = User.Identity.Name; }
 
 <!--This page is for student's landing page.
     User name and emergeny contact list displays on the top and student allows to select their feelings-->
