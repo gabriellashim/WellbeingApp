@@ -23,13 +23,13 @@ namespace Quokka_App.Pages
 {
     public class LeaderListModel : PageModel
     {
-        private ConnectionsString _db;
+        private readonly ConnectionsString _db;
 
         public LeaderListModel(ConnectionsString db)
         {
             _db = db;
         }
-        public string assignToMe { get; set; }
+
         public IEnumerable<UserClass> displayData { get; private set; }
 
         [BindProperty]
@@ -39,25 +39,24 @@ namespace Quokka_App.Pages
         public async Task OnGet(string id)
         {
             displayData = await _db.AspNetUsers.ToListAsync();
+            LeaderAssigned = await _db.AspNetUsers.FindAsync("12345");
+        }
+
+        public async Task <IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                var UserFromDB = await _db.AspNetUsers.FindAsync(LeaderAssigned.UserName);
+                UserFromDB.LeaderAssigned = LeaderAssigned.LeaderAssigned;
+
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Ind");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
-    LeaderAssigned = await _db.AspNetUsers.FindAsync("12345");
-}
 
-public async Task<IActionResult> OnPost()
-{
-    if (ModelState.IsValid)
-    {
-        var UserFromDB = await _db.AspNetUsers.FindAsync(LeaderAssigned.UserName);
-        UserFromDB.LeaderAssigned = LeaderAssigned.LeaderAssigned;
-
-        await _db.SaveChangesAsync();
-        return RedirectToPage("Ind");
-    }
-    else
-    {
-        return Page();
-    }
-}
-    }
 }

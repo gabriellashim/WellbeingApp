@@ -10,25 +10,24 @@ using Quokka_App.Model;
 
 namespace Quokka_App.Controllers
 {
+
     public class LeadersAssignedsController : Controller
     {
         private readonly LeadersAssignedContext _context;
+
 
         public LeadersAssignedsController(LeadersAssignedContext context)
         {
             _context = context;
         }
 
-        // GET: LeadersAssigneds
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.LeadersAssigned.ToListAsync());
-        }
 
         // GET: ViewAllStudent
         public async Task<IActionResult> ViewAllStudent()
         {
+
             return View(await _context.AspNetUsers.ToListAsync());
+
         }
 
         // GET: ViewWeekly
@@ -55,29 +54,7 @@ namespace Quokka_App.Controllers
             return View(await _context.Emotion.ToListAsync());
         }
 
-        // GET: LeadersAssigneds/Details/5
-        public async Task<IActionResult> Details(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var leadersAssigned = await _context.LeadersAssigned
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (leadersAssigned == null)
-            {
-                return NotFound();
-            }
-
-            return View(leadersAssigned);
-        }
-
-        // GET: LeadersAssigneds/Create
-        //public IActionResult Create()
-        //{
-            //return View();
-        //}
 
         // POST: LeadersAssigneds/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -98,7 +75,7 @@ namespace Quokka_App.Controllers
 
 
         // GET: LeadersAssigneds/ViewAllStudent/Edit
-        public async Task<IActionResult> Edit(string? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -136,7 +113,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: LeadersAssigneds/ViewAllStudent/Delete
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {

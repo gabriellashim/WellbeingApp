@@ -1,12 +1,14 @@
 ﻿@page
 @model LoginModel
 
-@{
-    ViewData["Title"] = "Log in";
-    Layout = "~/Areas/Identity/Pages/Quokka_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Log out";
+                Layout = "~/Areas/Identity/Pages/Quokka_Layout.cshtml"; }
 
-<!--Sign in Page-->
+<!--Sign out page-->
+
+<div>
+    <p style="color:red"> You are logged out. Please log in again </p>
+
     <div class="col-md-10 offset-md-1">
         <section>
             <div class="login-form-icon">
@@ -37,6 +39,9 @@
                 </div>
             </form>
         </section>
+    </div>
+
+
 </div>
 
 @section Scripts {
