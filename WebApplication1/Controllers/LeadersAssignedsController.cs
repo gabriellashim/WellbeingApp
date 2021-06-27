@@ -21,11 +21,6 @@ namespace Quokka_App.Controllers
             _context = context;
         }
 
-        // GET: LeadersAssigneds
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.LeadersAssigned.ToListAsync());
-        }
 
         // GET: ViewAllStudent
         public async Task<IActionResult> ViewAllStudent()

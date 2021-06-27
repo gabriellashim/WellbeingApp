@@ -7,7 +7,7 @@
 
 @{
     ViewData["Title"] = "View Students";
-    Layout = "/Views/Shared/_Layout.cshtml";
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }
 
 <!--Show table list of students, gives additional function for all senior leader/admin-->
@@ -39,7 +39,7 @@
 
             @if (@UserManager.GetUserAsync(User).Result.AccountType == "Senior Leader")
             {
-                <th>Edit</th>
+                <th>Manage</th>
             }
         </tr>
     </thead>

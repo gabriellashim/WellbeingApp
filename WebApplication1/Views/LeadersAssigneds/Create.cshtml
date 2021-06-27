@@ -8,13 +8,11 @@
 @inject SignInManager<WebAppUser> SignInManager
 @inject UserManager<WebAppUser> UserManager
 
-@{
-    ViewData["Title"] = "Leader";
-    Layout = "/Views/Shared/_Layout.cshtml";
-    int notificationCount = 0;
-    var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
-    var assignedleader = " ";
-}
+@{ ViewData["Title"] = "Leader";
+                Layout = "/Pages/Shared/_Layout.cshtml";
+                int notificationCount = 0;
+                var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
+                var assignedleader = " "; }
 
 <!--Iterate DB model to show how many notifications are there in a leader's account from student-->
 @foreach (var user in UserManager.Users)
@@ -50,40 +48,40 @@
     </div>
 
 
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <a asp-action="ViewNotification" class="btn btn-primary btn-lg leaderBtn" onclick="myFunction()">
-                        <i class="far fa-bell"></i>
-                        View Notifications
-                    </a>
-                </div>
-            </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <a asp-action="ViewNotification" class="btn btn-primary btn-lg leaderBtn" onclick="myFunction()">
+                <i class="far fa-bell"></i>
+                View Notifications
+            </a>
+        </div>
+    </div>
 
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <a asp-action="ViewWeekly" class="btn btn-primary btn-lg leaderBtn">
-                        <i class="fas fa-user-clock"></i>
-                        View Weekly Status
-                    </a>
-                </div>
-            </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <a asp-action="ViewWeekly" class="btn btn-primary btn-lg leaderBtn">
+                <i class="fas fa-user-clock"></i>
+                View Weekly Status
+            </a>
+        </div>
+    </div>
 
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <a asp-action="ViewMonthly" class="btn btn-primary btn-lg leaderBtn">
-                        <i class="far fa-calendar-alt"></i>
-                        View Monthly Status
-                    </a>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <a asp-action="ViewAllStudent" class="btn btn-primary btn-lg leaderBtn">
-                        <i class="fas fa-users"></i>
-                        View Student
-                    </a>
-                </div>
-            </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <a asp-action="ViewMonthly" class="btn btn-primary btn-lg leaderBtn">
+                <i class="far fa-calendar-alt"></i>
+                View Monthly Status
+            </a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <a asp-action="ViewAllStudent" class="btn btn-primary btn-lg leaderBtn">
+                <i class="fas fa-users"></i>
+                View All Students
+            </a>
+        </div>
+    </div>
 
 </form>
 

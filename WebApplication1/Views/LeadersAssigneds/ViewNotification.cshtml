@@ -7,7 +7,7 @@
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "ViewNotification";
-    Layout = "/Views/Shared/_Layout.cshtml";
+    Layout = "/Pages/Shared/_Layout.cshtml";
     int notificationCount = 0;
 
     var userFirstName = @UserManager.GetUserAsync(User).Result.FirstName;
