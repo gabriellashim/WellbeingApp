@@ -50,33 +50,35 @@
     {
         if (notification.description != null)
         {
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <div class="row mb-3">
-            <div class="col-sm-12">
-                <strong>@Html.DisplayFor(modelItem => notification.studentId)</strong>
-            </div>
-
-            <div class="col-sm-2"> @Html.DisplayFor(modelItem => notification.date)</div>
-            <div class="col-sm-10"></div>
-
-            <label class="col-sm-2 col-form-label">When To See</label>
-            <div class="col-sm-10"> @Html.DisplayFor(modelItem => notification.whenToSee)</div>
-
-            <label class="col-sm-2 col-form-label">Description</label>
-            <div class="col-sm-10">  @Html.DisplayFor(modelItem => notification.description)</div>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <strong>@Html.DisplayFor(modelItem => notification.studentId)</strong>
         </div>
-   
-         <button type ="button" class="close" data-dismiss="alert" aria-label="Close" onclick="dismissed();">
-             <span aria-hidden="true">&times;</span>
 
-         </button>
-    
-    </div>
-        }
-     }
+        <div class="col-sm-2"> @Html.DisplayFor(modelItem => notification.date)</div>
+        <div class="col-sm-10"></div>
 
-        <label id="count">Total: @notificationCount notification(s)</label>
+        <label class="col-sm-2 col-form-label">When To See</label>
+        <div class="col-sm-10"> @Html.DisplayFor(modelItem => notification.whenToSee)</div>
+
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">  @Html.DisplayFor(modelItem => notification.description)</div>
     </div>
+
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="dismissed();">
+        <span aria-hidden="true">&times;</span>
+
+    </button>
+
+</div>}
+            }
+    <label id="count">Total: @notificationCount notification(s)</label>
+
+    <div>
+        <a asp-action="Create">Back to main</a>
+    </div>
+</div>
 
 
 <style>
