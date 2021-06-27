@@ -41,23 +41,23 @@ namespace Quokka_App.Pages
             displayData = await _db.AspNetUsers.ToListAsync();
         }
     }
-            LeaderAssigned = await _db.AspNetUsers.FindAsync("12345");
-        }
+    LeaderAssigned = await _db.AspNetUsers.FindAsync("12345");
+}
 
-        public async Task <IActionResult> OnPost()
-        {
-            if (ModelState.IsValid)
-            {
-                var UserFromDB = await _db.AspNetUsers.FindAsync(LeaderAssigned.UserName);
-                UserFromDB.LeaderAssigned = LeaderAssigned.LeaderAssigned;
+public async Task<IActionResult> OnPost()
+{
+    if (ModelState.IsValid)
+    {
+        var UserFromDB = await _db.AspNetUsers.FindAsync(LeaderAssigned.UserName);
+        UserFromDB.LeaderAssigned = LeaderAssigned.LeaderAssigned;
 
-                await _db.SaveChangesAsync();
-                return RedirectToPage("Ind");
-            }
-            else
-            {
-                return Page();
-            }
-        }
+        await _db.SaveChangesAsync();
+        return RedirectToPage("Ind");
+    }
+    else
+    {
+        return Page();
+    }
+}
     }
 }

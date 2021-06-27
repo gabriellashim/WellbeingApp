@@ -25,7 +25,7 @@ namespace Quokka_App.Pages
         public UserClass UserClass { get; set; }
 
         #region snippet_OnGetPost
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(string id);
 
         public async Task<IActionResult> OnGetAsync(string? id)
         {
@@ -69,7 +69,7 @@ namespace Quokka_App.Pages
                 _db.SaveChanges();
                 //await _db.SaveChangesAsync();
 
-                s => s.FirstName, s => s.LastName, s => s.LeaderAssigned))
+                s => s.FirstName; s => s.LastName, s => s.LeaderAssigned))
             {
                 
                 await _db.SaveChangesAsync();
