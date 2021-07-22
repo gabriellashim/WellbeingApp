@@ -1,0 +1,111 @@
+﻿@model Quokka_App.Model.StudentReports
+@using Microsoft.AspNetCore.Identity
+@using Quokka_App.Model
+
+@inject UserManager<WebAppUser> UserManager
+
+@{ ViewData["Title"] = "StudentCommentView";
+    Layout = "/Views/Shared/_Layout.cshtml"; }
+
+<form asp-action="StudentCommentView">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
+    <div class="row mb-3">
+        <label asp-for="StudentID" class="col-sm-2 col-form-label">Your User Name</label>
+        <div class="col-sm-10">
+            <input asp-for="StudentID" class="form-control prefilled text-primary"
+                   value="@UserManager.GetUserAsync(User).Result.UserName"
+                   readonly />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label asp-for="ReportDate" class="col-sm-2 col-form-label">Today's date</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="ReportDate" class="form-control prefilled text-primary"
+                   value="@DateTime.Now.ToString("dd/MM/yy")"
+                   readonly />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">
+            You have selected
+        </label>
+        <div class="col-sm-10">
+            <input asp-for="Feeling"
+                   class="form-control prefilled text-primary" readonly />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-12 col-form-label">
+            Why have you chosen this?
+        </label>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <textarea asp-for="StudentComment" class="form-control" rows="4"> </textarea>
+            <span asp-validation-for="StudentComment" class="text-danger"></span>
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-12 pt-0">
+            Would you like to see a wellbeing leader?
+        </legend>
+        <div class="studentRequestForm1 col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="Stu_Yes" value="Yes" name="appt" onclick="ShowAndHideDiv();">
+                <label class="form-check-label" for="Stu_Yes"> Yes </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="Stu_No" value="No" name="appt" onclick="ShowAndHideDiv();">
+                <label class="form-check-label" for="Stu_No"> No </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="Stu_Unsure" value="Unsure" name="appt" onclick="ShowAndHideDiv();">
+                <label class="form-check-label" for="Stu_Unsure"> Not Sure</label>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="row mb-3 studentRequestForm2" id="StuWhenHide" style="visibility:hidden;">
+        <legend class="col-form-label col-sm-12 pt-0">
+            When would you like to see?
+        </legend>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" id="Asap" type="radio" asp-for="AppointmentDate" value="Asap" name="whenToSee">
+                <label class="form-check-label" for="Asap"> As soon as possible</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" id="NextWeek" type="radio" asp-for="AppointmentDate" value="Next Week" name="whenToSee">
+                <label class="form-check-label" for="NextWeek"> Sometimes in next week </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" id="Anytime" type="radio" asp-for="AppointmentDate" value="Anytime" name="whenToSee">
+                <label class="form-check-label" for="Anytime"> Anytime</label>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" value="Save" class="btn btn-primary">Submit</button>
+</form>
+<hr />
+<div>
+    <a asp-action="Create">Back to main</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+<style>
+    .prefilled {
+        background-color: transparent;
+        border-style: none;
+    }
+</style>

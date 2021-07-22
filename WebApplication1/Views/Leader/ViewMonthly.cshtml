@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Quokka_App.Model.StudentReports>
+@using Microsoft.AspNetCore.Identity
+@using Quokka_App.Model
+@inject UserManager<WebAppUser> UserManager
+
+@{
+    ViewData["Title"] = "View Monthly Status";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    int currentMonth = @DateTime.Now.Month;
+}
+
+
+<div style="text-align:center;">
+    <h4>
+        View Current Monthly
+    </h4>
+    <b> Current Month: @currentMonth</b>
+    <hr />
+</div>
+
+<!--Show table of previous reports of the students-->
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feeling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentComment)
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            @if (item.ReportDate.Month == @currentMonth)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Feeling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentComment)
+            </td>
+
+            @if (item.Feeling == "Happy")
+            {
+                <td>5</td>
+            }
+
+            @if (item.Feeling == "Okay")
+            {
+                <td>4</td>
+            }
+            @if (item.Feeling == "Annoyed")
+            {
+                <td>3</td>
+            }
+            @if (item.Feeling == "Frustrated")
+            {
+                <td>2</td>
+            }
+            @if (item.Feeling == "Angry")
+            {
+                <td>1</td>
+            }
+            @if (item.Feeling == "I need help")
+            {
+                <td>0</td>
+            }
+        </tr> 
+        }
+     }
+    </tbody>
+
+</table>
+
+<div>
+    <a asp-action="Create">Back to main</a>
+</div>
+
+<script>
+    function btn_Click() {
+        return currentMonth = @DateTime.Now.Month - 1;
+    }
+</script>

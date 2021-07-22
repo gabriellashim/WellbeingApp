@@ -1,0 +1,57 @@
+﻿@model IQueryable<WebAppUser>
+@using Microsoft.AspNetCore.Identity
+@using Quokka_App.Model
+@inject UserManager<WebAppUser> UserManager
+
+@{ ViewData["Title"] = "ViewAllStudent";
+    Layout = "/Pages/Shared/_Layout.cshtml";}
+
+<!--Show table list of students, gives additional function for all senior leader/admin-->
+
+<div style="text-align:center;">
+    <h4>View All Students</h4>
+    <h6>You are logged in as @UserManager.GetUserAsync(User).Result.FirstName</h6>
+    <hr />
+</div>
+
+<div>
+    <form asp-action="ViewAllStudent" asp-controller="Leader" method="post">
+        <input type="checkbox" name="isActive" value="false" />
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th><p>First Name</p></th>
+                <th><p>Last Name</p></th>
+                <th><p>User Name</p></th>
+                <th><p>Is Active</p></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr class="@(item.IsActive == false ? "table-danger" : "")">
+    <td><p>@Html.DisplayFor(modelItem => item.FirstName)</p></td>
+    <td><p>@Html.DisplayFor(modelItem => item.LastName)</p></td>
+    <td><p>@Html.DisplayFor(modelItem => item.UserName)</p></td>
+    <td>
+        <form asp-action="ViewAllStudent" asp-controller="Leader" method="post">
+
+            <input type="submit" asp-for="@item.IsActive" class="@(item.IsActive == false)" />
+        </form>
+    </td>
+</tr>
+       }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index">Back to main</a>
+</div>
+
+

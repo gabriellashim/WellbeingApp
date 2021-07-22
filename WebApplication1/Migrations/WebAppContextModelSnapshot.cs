@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication1.Data;
+using Quokka_App.Data;
 
-namespace WebApplication1.Migrations
+namespace Quokka_App.Migrations
 {
     [DbContext(typeof(WebAppContext))]
     partial class WebAppContextModelSnapshot : ModelSnapshot
@@ -154,7 +154,130 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplication1.Areas.Identity.Data.WebAppUser", b =>
+            modelBuilder.Entity("Quokka_App.Model.EmergencyContact", b =>
+                {
+                    b.Property<int>("ContactID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContactName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContactPhone")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContactID");
+
+                    b.ToTable("EmergencyContact");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.Emotion", b =>
+                {
+                    b.Property<int>("EmotionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StudentEmotion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmotionID");
+
+                    b.ToTable("Emotion");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.LeaderAssignedReport", b =>
+                {
+                    b.Property<DateTime>("AssignedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CompleteDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ReportID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("ReportID");
+
+                    b.ToTable("LeaderAssignedReport");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.LeaderChecked", b =>
+                {
+                    b.Property<DateTime?>("CheckedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReportID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("ReportID");
+
+                    b.ToTable("LeaderChecked");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.StudentReports", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("AppointmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("AssignedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CompleteDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Feeling")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SelectedEmotion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("StudentReports");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.WebAppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -162,8 +285,12 @@ namespace WebApplication1.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("AccountCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("AccountType")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -177,13 +304,20 @@ namespace WebApplication1.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LeaderAssigned")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -207,9 +341,6 @@ namespace WebApplication1.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("SchoolID")
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -245,7 +376,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebApplication1.Areas.Identity.Data.WebAppUser", null)
+                    b.HasOne("Quokka_App.Model.WebAppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -254,7 +385,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebApplication1.Areas.Identity.Data.WebAppUser", null)
+                    b.HasOne("Quokka_App.Model.WebAppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,7 +400,7 @@ namespace WebApplication1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication1.Areas.Identity.Data.WebAppUser", null)
+                    b.HasOne("Quokka_App.Model.WebAppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -278,11 +409,41 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WebApplication1.Areas.Identity.Data.WebAppUser", null)
+                    b.HasOne("Quokka_App.Model.WebAppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.LeaderAssignedReport", b =>
+                {
+                    b.HasOne("Quokka_App.Model.WebAppUser", "CheckedBy")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
+                    b.HasOne("Quokka_App.Model.StudentReports", "ReportChecked")
+                        .WithMany()
+                        .HasForeignKey("ReportID");
+
+                    b.Navigation("CheckedBy");
+
+                    b.Navigation("ReportChecked");
+                });
+
+            modelBuilder.Entity("Quokka_App.Model.LeaderChecked", b =>
+                {
+                    b.HasOne("Quokka_App.Model.WebAppUser", "CheckedBy")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
+                    b.HasOne("Quokka_App.Model.StudentReports", "ReportChecked")
+                        .WithMany()
+                        .HasForeignKey("ReportID");
+
+                    b.Navigation("CheckedBy");
+
+                    b.Navigation("ReportChecked");
                 });
 #pragma warning restore 612, 618
         }

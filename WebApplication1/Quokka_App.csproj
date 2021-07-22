@@ -6,11 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Identity\Pages\Account\Login - Copy.cshtml.cs" />
+    <Compile Remove="Pages\Account\Login - Copy.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\Identity\Pages\Account\Login - Copy.cshtml" />
+    <Content Remove="Pages\Account\Login - Copy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Database\TestDB1.ldf" />
+    <None Remove="Database\TestDB1.mdf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +38,17 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="MySql.Data" Version="8.0.25" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_LoginPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\" />
   </ItemGroup>
 
 </Project>
