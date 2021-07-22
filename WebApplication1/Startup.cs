@@ -34,7 +34,7 @@ namespace Quokka_App
             services.AddRazorPages();
             services.AddMvc().AddRazorPagesOptions(options =>
             {
-                options.Conventions.AddPageRoute("/Account/Login", "");
+                options.Conventions.AddPageRoute("/Home/Index", "");
             });
 
             services.AddDbContext<WebAppContext>(options =>

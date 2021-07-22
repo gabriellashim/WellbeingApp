@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Please select your account</p>
+    <form method="get" action="/Account/LoginStudent">
+        <button type="submit">Student</button>
+    </form>
+    <form method="get" action="/Account/LoginLeader">
+        <button type="submit">Leader</button>
+    </form>
+</div>
