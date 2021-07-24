@@ -11,30 +11,22 @@ namespace Quokka_App.Model
     public class StudentReports
     {
         [Key]
+        [Required]
+        [Display(Name = "Student ID")]
         public int ID { get; set; }
 
-        [ForeignKey("FirstName")]
-        public string StudentID { get; set; }
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Date Reported")]
+        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? ReportDate { get; set; }
 
-        public string Feeling { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime ReportDate { get; set; }
-
-        public DateTime? AppointmentDate { get; set; }
-
+        [Display(Name = "Student Comment")]
         public string StudentComment { get; set; }
 
-        [Column(Order = 7)]
-        [Display(Name = "Completed")]
-        public bool? IsComplete { get; set; } = true;
-
-
-        [Column(Order = 3)]
-        [Display(Name = "Assigned Date")]
-        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? AssignedDate { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Appointment Date")]
+        public DateTime? AppointmentDate { get; set; }
 
         [Column(Order = 4)]
         [Display(Name = "Complete Date")]
@@ -42,17 +34,21 @@ namespace Quokka_App.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CompleteDate { get; set; }
 
+        [Display(Name = "Student Feeling")]
+        [ForeignKey("StudentEmotion")]
+        public string Feeling { get; set; }
+
+        [ForeignKey("FirstName")]
+        [Display(Name = "Student ID")]
+        public string StudentID { get; set; }
+
+        [Column(Order = 7)]
+        [Display(Name = "Completed")]
+        public bool? IsComplete { get; set; } = true;
+
         //[Column(Order = 2)]
         //[Display(Name = "Assigned to")]
         //[ForeignKey("FirstName")]
         //public WebAppUser AssignedTo { get; set; } //Should be the fname or id or leader
-
-        [Column(Order = 9)]
-        [Display(Name = "Priority")]
-        public int Priority { get; set; }
-
-        [Column(Order = 8)]
-        [Display(Name = "selected emotion")]
-        public string SelectedEmotion { get; set; }
     }
 }

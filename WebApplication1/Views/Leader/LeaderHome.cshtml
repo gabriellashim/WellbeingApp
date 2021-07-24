@@ -8,7 +8,7 @@
 @{ ViewData["Title"] = "Leader";
     Layout = "/Pages/Shared/_Layout.cshtml";
     int notificationCount = 0;
-    var assignedleader = " "; }
+    var assignedleader = " ";}
 
 <!--Iterate DB model to show how many notifications are there in a leader's account from student-->
 @foreach (var user in UserManager.Users)
@@ -17,7 +17,7 @@
     {
         assignedleader = user.LeaderAssigned;
 
-        if (assignedleader.Equals(@ViewBag.FirstName))
+        if (assignedleader.Equals(((await UserManager.GetUserAsync(User)).FirstName)))
         {
             foreach (var notification in Model)
             {
@@ -38,7 +38,7 @@
     <div class="row mb-3">
         <div class="col-md-12">
             <h3>
-                Hi, @ViewBag.FirstName <br />
+                Hi @UserManager.GetUserAsync(User).Result.FirstName<br />
                 You have total @notificationCount notifications(s).
             </h3>
         </div>

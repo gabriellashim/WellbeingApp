@@ -3,12 +3,6 @@
 @using Quokka_App.Model
 @inject UserManager<WebAppUser> UserManager
 
-@{
-    Layout = "/Pages/Shared/_Layout.cshtml";
- }
-
-<!--This page is for student's landing page.
-    User name and emergeny contact list displays on the top and student allows to select their feelings-->
 @{ ViewData["Title"] = "Student Page";
     Layout = "/Pages/Shared/_Layout.cshtml"; }
 
@@ -23,7 +17,7 @@
     <!--User name displays-->
     <div class="nameContainer">
         <h3>
-            Hi, @ViewBag.FirstName <br />
+            Hi @UserManager.GetUserAsync(User).Result.FirstName<br />
             How are you feeling today?
         </h3>
     </div>

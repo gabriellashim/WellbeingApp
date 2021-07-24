@@ -11,7 +11,7 @@
 <div style="text-align:center;">
     <div class="nameContainer">
         <h2>
-            Thank you! @ViewBag.FirstName
+            Thank you! @((await UserManager.GetUserAsync(User)).FirstName)
         </h2>
         <h3>Your Wellbeing Leader will contact you shortly.</h3>
         <img src="~/lib/images/1happy.png" />

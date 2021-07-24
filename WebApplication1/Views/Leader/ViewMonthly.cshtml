@@ -6,7 +6,7 @@
 @{
     ViewData["Title"] = "View Monthly Status";
     Layout = "/Pages/Shared/_Layout.cshtml";
-    int currentMonth = @DateTime.Now.Month;
+    var currentMonth = @DateTime.Now;
 }
 
 
@@ -46,7 +46,7 @@
         @foreach (var item in Model)
         {
 
-            @if (item.ReportDate.Month == @currentMonth)
+            @if (item.ReportDate == @currentMonth)
             {
         <tr>
             <td>

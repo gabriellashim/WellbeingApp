@@ -17,10 +17,10 @@ namespace Quokka_App.Model
 
         [Display(Name = "Report checked")]
         [ForeignKey("ReportID")]
-        public StudentReports ReportChecked { get; set; }
+        public StudentReports ReportBy { get; set; }
 
         [Display(Name = "Is Checked")]
-        public bool IsChecked { get; set; }
+        public bool IsChecked { get; set; } = false;
 
         [Display(Name = "Checked Date")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

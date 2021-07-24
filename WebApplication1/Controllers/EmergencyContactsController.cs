@@ -64,40 +64,21 @@ namespace Quokka_App.Controllers
         // POST: EmergencyContacts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContactID,ContactName,ContactPhone")] EmergencyContact emergencyContact)
+        public async Task<IActionResult> Edit(int id, [Bind("ContactName,ContactPhone")] EmergencyContact emergencyContact)
         {
-            if (id != emergencyContact.ContactID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(emergencyContact);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmergencyContactExists(emergencyContact.ContactID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(emergencyContact);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(emergencyContact);
         }
 
-        private bool EmergencyContactExists(int id)
-        {
-            return _context.EmergencyContacts.Any(e => e.ContactID == id);
-        }
+        //private bool EmergencyContactExists(int id)
+        //{
+        //    return _context.EmergencyContacts.Any(e => e.ContactID == id);
+        //}
 
         // GET: EmergencyContacts/Details/5
         //public async Task<IActionResult> Details(int? id)

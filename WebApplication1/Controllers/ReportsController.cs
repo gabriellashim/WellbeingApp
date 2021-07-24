@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -41,6 +42,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions
+        [Authorize(Roles = "Administrator, Student")]
         public IActionResult Confirmation()
         {
             ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
@@ -48,15 +50,17 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/LeaderHome (Student Main Page)
+        [Authorize(Roles = "Administrator, Student")]
         public IActionResult StudentHome()
         {
-            ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
+            //ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
             return View();
         }
 
         // POST: Emotions/LeaderHome
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> StudentHome([Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment")] StudentReports emotion)
         {
             if (ModelState.IsValid)
@@ -69,6 +73,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/Edit/5
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> StudentCommentView(int? id)
         {
             if (id == null)
@@ -87,6 +92,7 @@ namespace Quokka_App.Controllers
         // POST: Emotions/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment")] StudentReports emotion)
         {
             if (id != emotion.ID)
@@ -118,6 +124,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

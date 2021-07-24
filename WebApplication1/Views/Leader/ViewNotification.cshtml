@@ -31,7 +31,7 @@
         if (user.LeaderAssigned != null)
         {
             assignedleader = user.LeaderAssigned;
-            if (assignedleader.Equals(@ViewBag.FirstName))
+            if (assignedleader.Equals(((await UserManager.GetUserAsync(User)).FirstName)))
             {
                 foreach (var notification in Model)
                 {
@@ -46,7 +46,7 @@
 
     @foreach (var notification in Model)
     {
-        if ((notification.StudentComment != null)&& (assignedleader.Equals(@ViewBag.FirstName)))
+        if ((notification.StudentComment != null)&& (assignedleader.Equals(((await UserManager.GetUserAsync(User)).FirstName))))
         {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <div class="row mb-3">

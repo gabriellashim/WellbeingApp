@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Quokka_App.Model
     public class EmergencyContact
     {
         [Key]
-        [Required]
         [Display(Name = "Contact ID")]
+        [Required]
         public int ContactID { get; set; }
 
         [Display(Name = "Contact Name")]

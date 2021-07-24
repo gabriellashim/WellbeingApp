@@ -21,10 +21,10 @@ namespace Quokka_App.Model
 
         [Display(Name = "Assigned Date")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime AssignedDate { get; set; }
+        public DateTime? AssignedDate { get; set; }
 
         [Display(Name = "Date Completed")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CompleteDate { get; set; }
+        public DateTime? CompleteDate { get; set; }
     }
 }

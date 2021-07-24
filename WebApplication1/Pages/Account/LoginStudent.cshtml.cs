@@ -13,8 +13,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Quokka_App.Model;
 using Ubiety.Dns.Core;
+using System.Security.Claims;
+using Quokka_App.Data;
 
-namespace WebApplication1.Areas.Identity.Pages.Account
+namespace Quokka_App.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -46,6 +48,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "UserName")]
             public string UserName { get; set; }
 
             [Required]
@@ -88,6 +91,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    //await _userManager.AddToRoleAsync(_userManager.GetUserAsync(User).Result, "Student");
                     return Redirect("~/Reports/StudentHome");
                 }
                 if (result.RequiresTwoFactor)

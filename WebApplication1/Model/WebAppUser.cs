@@ -11,20 +11,18 @@ namespace Quokka_App.Model
     public class WebAppUser : IdentityUser
     {
 
-        //Database representation of user first name
         [PersonalData]
         [Column(TypeName = "nvarchar(100)", Order = 1)]
         [Display(Name = "First Name")]
         [Required]
-        [MaxLength(100, ErrorMessage = "Wrong Input")] //Change later
+        [MaxLength(100, ErrorMessage = "Number of character exceeded")]
         public string FirstName { get; set; }
 
-        //Database representation of last name
         [PersonalData]
         [Column(TypeName = "nvarchar(100)", Order = 2)]
         [Display(Name = "Last Name")]
         [Required]
-        [MaxLength(100, ErrorMessage = "Wrong Input")] //Change later
+        [MaxLength(100, ErrorMessage = "Number of character exceeded")]
         public string LastName { get; set; }
 
         [PersonalData]
@@ -36,8 +34,10 @@ namespace Quokka_App.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? AccountCreated { get; set; }
 
+        //TODO: Fix later
         public string AccountType { get; set; }
 
+        //TODO: Fix later
         public string LeaderAssigned { get; set; }
     }
 }
