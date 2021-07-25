@@ -1,10 +1,9 @@
 ﻿@model IQueryable<WebAppUser>
-@using Microsoft.AspNetCore.Identity
-@using Quokka_App.Model
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "ViewAllStudent";
-    Layout = "/Pages/Shared/_Layout.cshtml";}
+   Layout = "/Pages/Shared/_Layout.cshtml";
+ }
 
 <!--Show table list of students, gives additional function for all senior leader/admin-->
 

@@ -1,14 +1,10 @@
-﻿@model IEnumerable<Quokka_App.Model.StudentReports>
-
-@using Quokka_App.Model;
-@using Microsoft.AspNetCore.Identity
-
+﻿@model IEnumerable<StudentReports>
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "Leader";
     Layout = "/Pages/Shared/_Layout.cshtml";
     int notificationCount = 0;
-    }
+ }
 
 <!--Iterate DB model to show how many notifications are there in a leader's account from student-->
 @*@foreach (var user in UserManager.Users)

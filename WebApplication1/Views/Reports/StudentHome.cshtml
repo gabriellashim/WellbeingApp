@@ -1,10 +1,9 @@
-﻿@model Quokka_App.Model.StudentReports
-@using Microsoft.AspNetCore.Identity
-@using Quokka_App.Model
+﻿@model StudentReports
 @inject UserManager<WebAppUser> UserManager
 
 @{ ViewData["Title"] = "Student Page";
-    Layout = "/Pages/Shared/_Layout.cshtml"; }
+   Layout = "/Pages/Shared/_Layout.cshtml"; 
+ }
 
 <!--Student's default page. User name and emergeny contact list displays on the top and student allows to select their feelings-->
 <form asp-action="StudentHome">
