@@ -15,12 +15,12 @@ namespace Quokka_App.Data
             : base(options) 
         {  
         }
-        public DbSet<StudentReports> GetStudentReports { get; set; }
+        public DbSet<StudentReports> StudentReportDb { get; set; }
         public DbSet<WebAppUser> WebAppUsers { get; set; }
         public DbSet<LeaderChecked> GetLeaderChecked { get; set; }
         public DbSet<LeaderAssignedReport> GetAssignedReports { get; set; }
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
-        public DbSet<Emotion> GetEmotions { get; set; }
+        public DbSet<Emotion> EmotionsDb { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

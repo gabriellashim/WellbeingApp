@@ -34,65 +34,18 @@ namespace Quokka_App
             services.AddDbContext<WebAppContext>(options =>
                        options.UseSqlServer(
                            Configuration.GetConnectionString("WebAppContextConnection")));
-            services.AddIdentity<WebAppUser, IdentityRole>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-            })
-                       .AddEntityFrameworkStores<WebAppContext>()
-                       .AddDefaultTokenProviders();
+
+            services.AddDefaultIdentity<WebAppUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<WebAppContext>();
             services.AddMvc();
-
-            //This is from microsoft installation of user roles
-            //services.AddScoped<IUserClaimsPrincipalFactory<WebAppUser>, AdditionalUserClaimsPrincipalFactory>();
-
-            //Policy builder for authorisation
-            services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-            });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             //Setting up identity options, I just commented this now this set up the identity framework register and login
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //        // Password settings.
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireNonAlphanumeric = true;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequiredLength = 5;
-            //    options.Password.RequiredUniqueChars = 1;
-
-            //        // Lockout settings.
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            //    options.Lockout.MaxFailedAccessAttempts = 5;
-            //    options.Lockout.AllowedForNewUsers = true;
-
-            //        // User settings.
-            //    options.User.AllowedUserNameCharacters =
-            //    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            //    options.User.RequireUniqueEmail = false;
-            //});
-
-
-            //Cookie configuration to logout the user after session
-            services.ConfigureApplicationCookie(options =>
+            services.Configure<IdentityOptions>(options =>
             {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-                options.LoginPath = "/Home/Index";
-                //options.AccessDeniedPath = "";
-                options.SlidingExpiration = true;
-            });
-
-            //Test this, i reckon this is getting roles by policy
-            IdentityBuilder builder = services.AddIdentityCore<WebAppUser>(options => {
+                // Password settings.
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = false;
@@ -109,15 +62,47 @@ namespace Quokka_App
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+
+
+            //Cookie configuration to logout the user after session
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Home/Index";
+                //options.AccessDeniedPath = "";
+                options.SlidingExpiration = true;
+            });
+
+            //Test this, i reckon this is getting roles by policy
+            //IdentityBuilder builder = services.AddIdentityCore<WebAppUser>(options =>
+            //{
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireNonAlphanumeric = true;
+            //    options.Password.RequireUppercase = false;
+            //    options.Password.RequiredLength = 5;
+            //    options.Password.RequiredUniqueChars = 1;
+
+            //    // Lockout settings.
+            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            //    options.Lockout.MaxFailedAccessAttempts = 5;
+            //    options.Lockout.AllowedForNewUsers = true;
+
+            //    // User settings.
+            //    options.User.AllowedUserNameCharacters =
+            //    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            //    options.User.RequireUniqueEmail = false;
+            //});
+            //builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
 
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
-            IWebHostEnvironment env,
-            RoleManager<IdentityRole> roleManager)
+            IWebHostEnvironment env)
         {
 
             if (env.IsDevelopment())

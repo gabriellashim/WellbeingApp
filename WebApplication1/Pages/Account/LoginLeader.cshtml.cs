@@ -19,16 +19,16 @@ namespace Quokka_App.Pages.Account
     [AllowAnonymous]
     public class LeaderLoginModel : PageModel
     {
-        private readonly UserManager<WebAppUser> _userManager;
+        //private readonly UserManager<WebAppUser> _userManager;
         private readonly SignInManager<WebAppUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly ILogger<LeaderLoginModel> _logger;
 
 
         public LeaderLoginModel(SignInManager<WebAppUser> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<WebAppUser> userManager)
+            ILogger<LeaderLoginModel> logger)
+            //UserManager<WebAppUser> userManager)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }

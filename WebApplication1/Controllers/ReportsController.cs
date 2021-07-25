@@ -32,7 +32,7 @@ namespace Quokka_App.Controllers
                 return NotFound();
             }
 
-            var emotion = await _context.GetStudentReports
+            var emotion = await _context.StudentReportDb
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (emotion == null)
             {
@@ -82,7 +82,7 @@ namespace Quokka_App.Controllers
                 return NotFound();
             }
 
-            var emotion = await _context.GetStudentReports.FindAsync(id);
+            var emotion = await _context.StudentReportDb.FindAsync(id);
             if (emotion == null)
             {
                 return NotFound();
@@ -133,7 +133,7 @@ namespace Quokka_App.Controllers
                 return NotFound();
             }
 
-            var emotion = await _context.GetStudentReports
+            var emotion = await _context.StudentReportDb
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (emotion == null)
             {
@@ -148,15 +148,15 @@ namespace Quokka_App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var emotion = await _context.GetStudentReports.FindAsync(id);
-            _context.GetStudentReports.Remove(emotion);
+            var emotion = await _context.StudentReportDb.FindAsync(id);
+            _context.StudentReportDb.Remove(emotion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(StudentHome));
         }
 
         private bool EmotionExists(int id)
         {
-            return _context.GetStudentReports.Any(e => e.ID == id);
+            return _context.StudentReportDb.Any(e => e.ID == id);
         }
     }
 }

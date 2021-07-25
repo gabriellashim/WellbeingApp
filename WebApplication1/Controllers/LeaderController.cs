@@ -54,21 +54,21 @@ namespace Quokka_App.Controllers
         [Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> ViewWeekly()
         {
-            return View(await _context.GetStudentReports.ToListAsync());
+            return View(await _context.StudentReportDb.ToListAsync());
         }
 
         // GET: ViewNotification
         //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> ViewNotification()
         {
-            return View(await _context.GetStudentReports.ToListAsync());
+            return View(await _context.StudentReportDb.ToListAsync());
         }
 
         // GET: LeaderHome
         //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> LeaderHome()
         {
-            return View(await _context.GetStudentReports.ToListAsync());
+            return View(await _context.StudentReportDb.ToListAsync());
         }
 
         // GET: ViewMonthly

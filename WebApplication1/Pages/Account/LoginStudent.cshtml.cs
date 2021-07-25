@@ -19,18 +19,15 @@ using Quokka_App.Data;
 namespace Quokka_App.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginModel : PageModel
+    public class StudentLoginModel : PageModel
     {
-        private readonly UserManager<WebAppUser> _userManager;
         private readonly SignInManager<WebAppUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly ILogger<StudentLoginModel> _logger;
 
 
-        public LoginModel(SignInManager<WebAppUser> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<WebAppUser> userManager)
+        public StudentLoginModel(SignInManager<WebAppUser> signInManager,
+            ILogger<StudentLoginModel> logger)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
