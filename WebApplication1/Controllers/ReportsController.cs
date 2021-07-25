@@ -12,6 +12,7 @@ using Quokka_App.Model;
 
 namespace Quokka_App.Controllers
 {
+    //[Authorize(Roles = "Administrator, Student")]
     public class Reports : Controller
     {
         private readonly WebAppContext _context;
@@ -42,7 +43,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions
-        [Authorize(Roles = "Administrator, Student")]
+        //[Authorize(Roles = "Student")]
         public IActionResult Confirmation()
         {
             ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
@@ -50,7 +51,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/LeaderHome (Student Main Page)
-        [Authorize(Roles = "Administrator, Student")]
+        //[Authorize(Roles = "Student")]
         public IActionResult StudentHome()
         {
             //ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
@@ -60,7 +61,7 @@ namespace Quokka_App.Controllers
         // POST: Emotions/LeaderHome
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator, Student")]
+        //[Authorize(Roles = "Student")]
         public async Task<IActionResult> StudentHome([Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment")] StudentReports emotion)
         {
             if (ModelState.IsValid)
@@ -73,7 +74,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/Edit/5
-        [Authorize(Roles = "Administrator, Student")]
+        //[Authorize(Roles = "Student")]
         public async Task<IActionResult> StudentCommentView(int? id)
         {
             if (id == null)
@@ -92,7 +93,7 @@ namespace Quokka_App.Controllers
         // POST: Emotions/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator, Student")]
+        //[Authorize(Roles = "Student")]
         public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment")] StudentReports emotion)
         {
             if (id != emotion.ID)
@@ -124,7 +125,7 @@ namespace Quokka_App.Controllers
         }
 
         // GET: Emotions/Delete/5
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

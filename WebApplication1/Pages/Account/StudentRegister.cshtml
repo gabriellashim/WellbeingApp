@@ -1,8 +1,8 @@
 ﻿@page
-@model RegisterModel
+@model StudentRegisterModel
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Pages/Quokka_Layout.cshtml";
+    Layout = "~/Pages/StudentQuokka_Layout.cshtml";
 }
 
 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -42,14 +42,14 @@
         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    @*<div class="form-group">
         <label asp-for="Input.AccountType"></label>
         <select id="AccountType" name="AccountType" asp-for="Input.AccountType">
             <option value="Senior Leader">Senior Leader</option>
             <option value="Leader">Leader</option>
             <option value="Student" selected="selected">Student</option>
         </select>
-    </div>
+    </div>*@
 
     <button type="submit" class="btn btn-primary">Register</button>
 </form>

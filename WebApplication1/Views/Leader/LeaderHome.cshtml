@@ -8,10 +8,10 @@
 @{ ViewData["Title"] = "Leader";
     Layout = "/Pages/Shared/_Layout.cshtml";
     int notificationCount = 0;
-    var assignedleader = " ";}
+    }
 
 <!--Iterate DB model to show how many notifications are there in a leader's account from student-->
-@foreach (var user in UserManager.Users)
+@*@foreach (var user in UserManager.Users)
 {
     if (user.LeaderAssigned != null)
     {
@@ -29,7 +29,7 @@
             }
         }
     }
-}
+}*@
 
 <!---Leader's landing Page-->
 <form asp-action="Create" class="leaderPageForm">

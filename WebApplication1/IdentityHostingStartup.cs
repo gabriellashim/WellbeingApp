@@ -14,19 +14,31 @@ namespace Quokka_App
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<WebAppContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("WebAppContextConnection")));
 
-                services.AddDefaultIdentity<WebAppUser>(options => 
-                {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireUppercase = false;
-                })
-                    .AddEntityFrameworkStores<WebAppContext>();
+                //services.AddDefaultIdentity<WebAppUser>(options =>
+                //{
+                //    options.SignIn.RequireConfirmedAccount = false;
+                //    options.Password.RequireLowercase = false;
+                //    options.Password.RequireUppercase = false;
+                //})
+                //    .AddEntityFrameworkStores<WebAppContext>();
             });
         }
     }
 }
+
+
+//services.AddIdentity<WebAppUser, IdentityRole>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//    options.Password.RequireLowercase = false;
+//    options.Password.RequireUppercase = false;
+//})
+//           .AddEntityFrameworkStores<WebAppContext>()
+//           .AddDefaultTokenProviders();
+//RoleManager<IdentityRole> roleManager)

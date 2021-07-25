@@ -21,6 +21,7 @@ namespace Quokka_App.Data
         public DbSet<LeaderAssignedReport> GetAssignedReports { get; set; }
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
         public DbSet<Emotion> GetEmotions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,7 +30,6 @@ namespace Quokka_App.Data
             builder.Entity<LeaderAssignedReport>().ToTable("LeaderAssignedReport");
             builder.Entity<EmergencyContact>().ToTable("EmergencyContact");
             builder.Entity<Emotion>().ToTable("Emotion");
-
         }
 
     }

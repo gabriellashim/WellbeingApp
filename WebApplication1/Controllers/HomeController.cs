@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Quokka_App.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly WebAppContext _context;
@@ -17,7 +18,6 @@ namespace Quokka_App.Controllers
         {
             _context = context;
         }
-        [AllowAnonymous]
 
         public IActionResult Index()
         {

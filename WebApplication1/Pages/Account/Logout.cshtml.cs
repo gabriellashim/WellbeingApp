@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Quokka_App.Model;
 using Ubiety.Dns.Core;
 
-namespace WebApplication1.Areas.Identity.Pages.Account
+namespace Quokka_App.Pages.Account
 {
     [AllowAnonymous]
     public class LogoutModel : PageModel

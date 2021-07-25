@@ -34,10 +34,10 @@ namespace Quokka_App.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? AccountCreated { get; set; }
 
-        //TODO: Fix later
-        public string AccountType { get; set; }
+        ////TODO: Fix later
+        //public string AccountType { get; set; }
 
-        //TODO: Fix later
-        public string LeaderAssigned { get; set; }
+        ////TODO: Fix later
+        //public string LeaderAssigned { get; set; }
     }
 }

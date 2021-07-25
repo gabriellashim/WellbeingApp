@@ -36,7 +36,6 @@ namespace Quokka_App.Controllers
 
         //}
 
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public ActionResult ViewAllStudent(bool isActive = true)
         {
             var list = _userManager.Users
@@ -59,30 +58,39 @@ namespace Quokka_App.Controllers
         }
 
         // GET: ViewNotification
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
+        //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> ViewNotification()
         {
             return View(await _context.GetStudentReports.ToListAsync());
         }
 
         // GET: LeaderHome
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
+        //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> LeaderHome()
         {
             return View(await _context.GetStudentReports.ToListAsync());
         }
 
         // GET: ViewMonthly
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
-        public async Task<IActionResult> ViewMonthly()
+        // [Authorize(Roles = "Administrator, Leader, Senior Leader")]
+        public IActionResult ViewMonthly(bool isActive = true)
         {
-            return View(await _context.GetStudentReports.ToListAsync());
+            var list = _userManager.Users
+                        .OrderBy(lname => lname.LastName)
+                        .OrderBy(fname => fname.FirstName)
+                        .Select(users => users);
+
+            if (isActive)
+            {
+                list = list.Where(user => user.IsActive == isActive);
+            }
+            return View(list);
         }
 
         // POST: LeadersAssigneds/LeaderHome
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
+        //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
         public async Task<IActionResult> LeaderHome([Bind("UserID,RoleID")] IdentityRole assignedRole)
         {
             if (ModelState.IsValid)
@@ -125,14 +133,14 @@ namespace Quokka_App.Controllers
             if (ModelState.IsValid)
             {
                 _context.Update(leadersAssigned);
-                await _context.SaveChangesAsync();  
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ViewAllStudent));
             }
             return View(leadersAssigned);
         }
 
         // GET: LeadersAssigneds/ViewAllStudent/Delete
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -154,7 +162,7 @@ namespace Quokka_App.Controllers
         // POST: LeadersAssigneds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var leadersAssigned = await _context.WebAppUsers.FindAsync(id);

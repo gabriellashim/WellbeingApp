@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Quokka_App.Model.StudentReports>
+﻿@model IEnumerable<StudentReports>
 @using Microsoft.AspNetCore.Identity
 @using Quokka_App.Model
 @inject UserManager<WebAppUser> UserManager
@@ -14,7 +14,7 @@
     <h4>
         View Current Monthly
     </h4>
-    <b> Current Month: @currentMonth</b>
+    <b> Current Date/Time: @DateTime.Now.Month</b>
     <hr />
 </div>
 
@@ -23,19 +23,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StudentID)
+                ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Feeling)
+                Reported Emotion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReportDate)
+                Report Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppointmentDate)
+                Appointment Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StudentComment)
+                Student Comment
             </th>
             <th>
                 Score
@@ -50,7 +50,7 @@
             {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.StudentID)
+                @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Feeling)
@@ -65,34 +65,19 @@
                 @Html.DisplayFor(modelItem => item.StudentComment)
             </td>
 
-            @if (item.Feeling == "Happy")
+            @switch (item.Feeling)
             {
-                <td>5</td>
+                case ("Happy"):<td>5</td>break;
+                case ("Okay"):<td>4</td>break;
+                case ("Annoyed"):<td>3</td>break;
+                case ("Frustrated"):<td>2</td>break;
+                case ("Angry"):<td>1</td>break;
+                case ("Help"):<td>0</td>break; 
+                default:break;
             }
-
-            @if (item.Feeling == "Okay")
-            {
-                <td>4</td>
-            }
-            @if (item.Feeling == "Annoyed")
-            {
-                <td>3</td>
-            }
-            @if (item.Feeling == "Frustrated")
-            {
-                <td>2</td>
-            }
-            @if (item.Feeling == "Angry")
-            {
-                <td>1</td>
-            }
-            @if (item.Feeling == "I need help")
-            {
-                <td>0</td>
-            }
-        </tr> 
+        </tr>
         }
-     }
+    }
     </tbody>
 
 </table>
@@ -103,6 +88,6 @@
 
 <script>
     function btn_Click() {
-        return currentMonth = @DateTime.Now.Month - 1;
-    }
+                return currentMonth = @DateTime.Now.Month - 1;
+            }
 </script>

@@ -15,26 +15,29 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Quokka_App.Model;
 
-namespace WebApplication1.Areas.Identity.Pages.Account
+namespace Quokka_App.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class StudentRegisterModel : PageModel
     {
         private readonly SignInManager<WebAppUser> _signInManager;
         private readonly UserManager<WebAppUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly ILogger<StudentRegisterModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RegisterModel(
+        //private readonly IEmailSender _emailSender;
+
+        public StudentRegisterModel(
             UserManager<WebAppUser> userManager,
             SignInManager<WebAppUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            ILogger<StudentRegisterModel> logger,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _roleManager = roleManager;
+            //_emailSender = emailSender;
         }
 
         [BindProperty]
@@ -97,32 +100,45 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebAppUser { UserName = Input.SchoolID, FirstName = Input.FirstName, LastName = Input.LastName, AccountType = Request.Form["AccountType"], LeaderAssigned = Input.LeaderAssigned };
-                    //, AccountType = Request.Form["AccountType"], LeaderAssigned = Input.LeaderAssigned};
+                var user = new WebAppUser
+                {
+                    UserName = Input.SchoolID,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (!(await _roleManager.RoleExistsAsync("Student"))) 
                     {
-                        return RedirectToPage("RegisterConfirmation", new {returnUrl = returnUrl });
+                        await _roleManager.CreateAsync(new IdentityRole("Student"));
                     }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    await _userManager.AddToRoleAsync(user, "Student");
+
+                    // NOTE:
+                    // Please activate this code if email authorisation is required
+                    //_logger.LogInformation("User created a new account with password.");
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new {returnUrl = returnUrl });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect(returnUrl);
+                    //}
                 }
                 foreach (var error in result.Errors)
                 {
