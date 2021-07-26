@@ -28,14 +28,6 @@ namespace Quokka_App.Controllers
             _logger = logger;
         }
 
-        ////GET: ViewAllStudent
-        //public IActionResult ViewAllStudent()
-        //{
-
-        //    return View();
-
-        //}
-
         public ActionResult ViewAllStudent(bool isActive = true)
         {
             var list = _userManager.Users
@@ -176,5 +168,20 @@ namespace Quokka_App.Controllers
         //    return _context.leadersassigned.any(e => e.id == id);
         //}
 
+        public async Task<IActionResult> AssignLeader([Bind("CheckedBy,ReportChecked,AssignedDate,CompleteDate")] LeaderAssignedReport leaderAssigned)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(leaderAssigned);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("StudentCommentView", new { leaderAssigned });
+            }
+            return View(leaderAssigned);
+        }
+
+        public void AssignLeaderToStudent(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

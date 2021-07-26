@@ -16,5 +16,8 @@ namespace Quokka_App.Model
         [Display(Name = "Student Emotion")]
         [Required]
         public string StudentEmotion { get; set; }
+
+        //Navigation Properties
+        public virtual List<StudentReports> EmotionStudentReport { get; set; }
     }
 }

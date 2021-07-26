@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace Quokka_App.Model
 {
-    [Keyless]
+    
     public class LeaderAssignedReport
     {
-        [Display(Name = "Check by")]
-        [ForeignKey("Id")]
-        public WebAppUser CheckedBy { get; set; }
 
-        [Display(Name = "Report checked")]
-        [ForeignKey("ReportID")]
-        public StudentReports ReportChecked { get; set; }
+        [Display(Name = "Leader ID")]
+        public string LeaderID { get; set; }
+
+        [Display(Name = "Report ID")]
+        public int ReportID { get; set; }
 
         [Display(Name = "Assigned Date")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,5 +25,10 @@ namespace Quokka_App.Model
         [Display(Name = "Date Completed")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CompleteDate { get; set; }
+
+        //Navigation Properties
+        public virtual WebAppUser ManyWebAppUser { get; set; }
+        public virtual StudentReports ManyStudentReports { get; set; }
+
     }
 }

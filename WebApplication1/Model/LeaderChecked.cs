@@ -8,23 +8,25 @@ using System.Threading.Tasks;
 
 namespace Quokka_App.Model
 {
-    [Keyless]
+    
     public class LeaderChecked
     {
+       
         [Display(Name = "Check by")]
-        [ForeignKey("Id")]
-        public WebAppUser CheckedBy { get; set; }
+        public string WebAppUserID { get; set; }
 
         [Display(Name = "Report checked")]
-        [ForeignKey("ReportID")]
-        public StudentReports ReportBy { get; set; }
-
-        [Display(Name = "Is Checked")]
-        public bool IsChecked { get; set; } = false;
+        public int StudentReportsID { get; set; }
 
         [Display(Name = "Checked Date")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? CheckedDate { get; set; }
 
+        [Display(Name = "Leader Comment")]
+        public string LeaderComment { get; set; }
+
+        //Navigation Properties
+        public virtual WebAppUser ManyWebAppUser { get; set; }
+        public virtual StudentReports ManyStudentReports { get; set; }
     }
 }

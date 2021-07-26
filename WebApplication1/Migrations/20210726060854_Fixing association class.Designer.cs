@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quokka_App.Data;
 
 namespace Quokka_App.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210726060854_Fixing association class")]
+    partial class Fixingassociationclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,12 +192,6 @@ namespace Quokka_App.Migrations
 
             modelBuilder.Entity("Quokka_App.Model.LeaderAssignedReport", b =>
                 {
-                    b.Property<int>("ReportID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LeaderID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("AssignedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
@@ -204,33 +200,17 @@ namespace Quokka_App.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ReportID", "LeaderID");
-
-                    b.HasIndex("LeaderID");
-
-                    b.ToTable("LeaderAssignedReport");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.LeaderChecked", b =>
-                {
-                    b.Property<int>("StudentReportsID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WebAppUserID")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime?>("CheckedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("ReportID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("LeaderComment")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("Id");
 
-                    b.HasKey("StudentReportsID", "WebAppUserID");
+                    b.HasIndex("ReportID");
 
-                    b.HasIndex("WebAppUserID");
-
-                    b.ToTable("LeaderChecked");
+                    b.ToTable("LeaderAssignedReport");
                 });
 
             modelBuilder.Entity("Quokka_App.Model.StudentReports", b =>
@@ -247,8 +227,8 @@ namespace Quokka_App.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Feeling")
-                        .HasColumnType("int");
+                    b.Property<string>("Feeling")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsComplete")
                         .HasColumnType("bit");
@@ -260,14 +240,10 @@ namespace Quokka_App.Migrations
                     b.Property<string>("StudentComment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("Feeling");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("StudentReports");
                 });
@@ -407,78 +383,17 @@ namespace Quokka_App.Migrations
 
             modelBuilder.Entity("Quokka_App.Model.LeaderAssignedReport", b =>
                 {
-                    b.HasOne("Quokka_App.Model.WebAppUser", "ManyWebAppUser")
-                        .WithMany("UserLeaderAssigned")
-                        .HasForeignKey("LeaderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Quokka_App.Model.WebAppUser", "CheckedBy")
+                        .WithMany()
+                        .HasForeignKey("Id");
 
-                    b.HasOne("Quokka_App.Model.StudentReports", "ManyStudentReports")
-                        .WithMany("SRLeaderAssigned")
-                        .HasForeignKey("ReportID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Quokka_App.Model.StudentReports", "ReportChecked")
+                        .WithMany()
+                        .HasForeignKey("ReportID");
 
-                    b.Navigation("ManyStudentReports");
+                    b.Navigation("CheckedBy");
 
-                    b.Navigation("ManyWebAppUser");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.LeaderChecked", b =>
-                {
-                    b.HasOne("Quokka_App.Model.StudentReports", "ManyStudentReports")
-                        .WithMany("SRLeaderChecked")
-                        .HasForeignKey("StudentReportsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quokka_App.Model.WebAppUser", "ManyWebAppUser")
-                        .WithMany("Userleaderchecked")
-                        .HasForeignKey("WebAppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ManyStudentReports");
-
-                    b.Navigation("ManyWebAppUser");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.StudentReports", b =>
-                {
-                    b.HasOne("Quokka_App.Model.Emotion", "SREmotion")
-                        .WithMany("EmotionStudentReport")
-                        .HasForeignKey("Feeling")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quokka_App.Model.WebAppUser", "SRWebAppUser")
-                        .WithMany("UserStudentReport")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("SREmotion");
-
-                    b.Navigation("SRWebAppUser");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.Emotion", b =>
-                {
-                    b.Navigation("EmotionStudentReport");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.StudentReports", b =>
-                {
-                    b.Navigation("SRLeaderAssigned");
-
-                    b.Navigation("SRLeaderChecked");
-                });
-
-            modelBuilder.Entity("Quokka_App.Model.WebAppUser", b =>
-                {
-                    b.Navigation("UserLeaderAssigned");
-
-                    b.Navigation("Userleaderchecked");
-
-                    b.Navigation("UserStudentReport");
+                    b.Navigation("ReportChecked");
                 });
 #pragma warning restore 612, 618
         }

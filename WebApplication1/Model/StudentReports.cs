@@ -12,7 +12,7 @@ namespace Quokka_App.Model
     {
         [Key]
         [Required]
-        [Display(Name = "Student ID")]
+        [Display(Name = "Report ID")]
         public int ID { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -34,21 +34,27 @@ namespace Quokka_App.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CompleteDate { get; set; }
 
-        [Display(Name = "Student Feeling")]
-        [ForeignKey("StudentEmotion")]
-        public string Feeling { get; set; }
-
-        [ForeignKey("FirstName")]
-        [Display(Name = "Student ID")]
-        public string StudentID { get; set; }
-
         [Column(Order = 7)]
         [Display(Name = "Completed")]
         public bool? IsComplete { get; set; } = true;
 
-        //[Column(Order = 2)]
-        //[Display(Name = "Assigned to")]
-        //[ForeignKey("FirstName")]
-        //public WebAppUser AssignedTo { get; set; } //Should be the fname or id or leader
+        //Navigation Properties 
+
+        //Relation to LeaderChecked table
+        public virtual List<LeaderChecked> SRLeaderChecked { get; set; }
+
+        //Relation to LeaderAssignment table
+        public virtual List<LeaderAssignedReport> SRLeaderAssigned { get; set; }
+
+        //User ID of the Assignee
+        [Display(Name = "Asignee ID")]
+        public string UserID { get; set; }
+        public virtual WebAppUser SRWebAppUser { get; set; }
+
+        //Collects data from the student emotion table
+        [Display(Name = "Student Feeling")]
+        public int Feeling { get; set; }
+        public virtual Emotion SREmotion{ get; set; }
+
     }
 }

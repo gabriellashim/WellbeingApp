@@ -64,13 +64,13 @@ namespace Quokka_App.Pages.Account
             [Display(Name = "SchoolID")]
             public string SchoolID { get; set; }
 
-            [DataType(DataType.Text)]
-            [Display(Name = "AccountType")]
-            public string AccountType { get; set; }
+            //[DataType(DataType.Text)]
+            //[Display(Name = "AccountType")]
+            //public string AccountType { get; set; }
 
-            [DataType(DataType.Text)]
-            [Display(Name = "LeaderAssigned")]
-            public string LeaderAssigned { get; set; }
+            //[DataType(DataType.Text)]
+            //[Display(Name = "LeaderAssigned")]
+            //public string LeaderAssigned { get; set; }
 
             [EmailAddress]
             [Display(Name = "Email")]
@@ -104,7 +104,8 @@ namespace Quokka_App.Pages.Account
                 {
                     UserName = Input.SchoolID,
                     FirstName = Input.FirstName,
-                    LastName = Input.LastName
+                    LastName = Input.LastName,
+                    Id = Input.SchoolID
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -112,7 +113,7 @@ namespace Quokka_App.Pages.Account
                 {
                     if (!(await _roleManager.RoleExistsAsync("Student"))) 
                     {
-                        await _roleManager.CreateAsync(new IdentityRole("Student"));
+                        await _roleManager.CreateAsync(new IdentityRole("Student") { Id = "3" });
                     }
                     await _userManager.AddToRoleAsync(user, "Student");
 
