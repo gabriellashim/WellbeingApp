@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quokka_App.Data;
 
 namespace Quokka_App.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210728122100_FixingNotification")]
+    partial class FixingNotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,20 +262,17 @@ namespace Quokka_App.Migrations
                     b.Property<string>("ReporterID")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SRWebAppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("StudentComment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("Feeling");
 
-                    b.HasIndex("SRWebAppUserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("StudentReports");
                 });
@@ -462,7 +461,7 @@ namespace Quokka_App.Migrations
 
                     b.HasOne("Quokka_App.Model.WebAppUser", "SRWebAppUser")
                         .WithMany("UserStudentReport")
-                        .HasForeignKey("SRWebAppUserId");
+                        .HasForeignKey("UserID");
 
                     b.Navigation("SREmotion");
 

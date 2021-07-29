@@ -1,0 +1,24 @@
+﻿@model List<StudentReports>
+@inject UserManager<WebAppUser> _userManager;
+
+@{
+    var userRoles = await _userManager.GetUsersInRoleAsync("Student");
+}
+
+<h1>Notification</h1>
+<body>
+    <div>
+        <form>
+            @foreach (var roles in userRoles)
+            {
+                foreach (var report in Model)
+                {
+                    if (roles.Id == report.UserID)
+                    {
+                        <p>@report</p>
+                    }
+                }
+            }
+        </form>
+    </div>
+</body>

@@ -54,11 +54,20 @@ namespace Quokka_App.Controllers
         //[Authorize(Roles = "Student")]
         public IActionResult StudentHome()
         {
-            //ViewBag.FirstName = _userManager.GetUserAsync(User).Result.FirstName;
             return View();
         }
 
-        // POST: Emotions/LeaderHome
+        // GET: (Student Main Page)
+        //[Authorize(Roles = "Student")]
+        //public IActionResult StudentHome(string id)
+        //{
+        //    var report = _context.StudentReportDb
+        //        .Include(c => c.ID)
+        //        .SingleOrDefault(x => x.UserID == id);
+
+        //    return View(report);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "Student")]
@@ -73,7 +82,7 @@ namespace Quokka_App.Controllers
             return View(emotion);
         }
 
-        // GET: Emotions/Edit/5
+        // GET:
         //[Authorize(Roles = "Student")]
         public async Task<IActionResult> StudentCommentView(int? id)
         {
@@ -90,11 +99,11 @@ namespace Quokka_App.Controllers
             return View(emotion);
         }
 
-        // POST: Emotions/Edit/5
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "Student")]
-        public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment")] StudentReports emotion)
+        public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment,ReporterID,UserID")] StudentReports emotion)
         {
             if (id != emotion.ID)
             {
@@ -124,7 +133,7 @@ namespace Quokka_App.Controllers
             return View(emotion);
         }
 
-        // GET: Emotions/Delete/5
+        // GET: 
         //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -158,5 +167,6 @@ namespace Quokka_App.Controllers
         {
             return _context.StudentReportDb.Any(e => e.ID == id);
         }
+
     }
 }

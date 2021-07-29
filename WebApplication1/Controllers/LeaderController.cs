@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Quokka_App.Data;
+using Quokka_App.Migrations;
 using Quokka_App.Model;
+using Quokka_App.ViewModel;
 
 namespace Quokka_App.Controllers
 {
@@ -42,18 +44,28 @@ namespace Quokka_App.Controllers
             return View(list);
         }
 
-        // GET: ViewWeekly
-        [Authorize(Roles = "Administrator, Leader, Senior Leader")]
-        public async Task<IActionResult> ViewWeekly()
+        public async Task<IActionResult> StudentEditAsync(string id)
         {
-            return View(await _context.StudentReportDb.ToListAsync());
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var appUser = await _context.WebAppUsers.FindAsync(id);
+            if (appUser == null)
+            {
+                return NotFound();
+            }
+            return View(appUser);
         }
 
         // GET: ViewNotification
         //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
-        public async Task<IActionResult> ViewNotification()
+        public async Task<IActionResult> Notification()
         {
-            return View(await _context.StudentReportDb.ToListAsync());
+            //var userRoles = await _userManager.GetUsersInRoleAsync("Student");
+            var userReports = await _context.StudentReportDb.ToListAsync();
+            return View(userReports);
         }
 
         // GET: LeaderHome
@@ -80,41 +92,25 @@ namespace Quokka_App.Controllers
         }
 
         // POST: LeadersAssigneds/LeaderHome
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
-        public async Task<IActionResult> LeaderHome([Bind("UserID,RoleID")] IdentityRole assignedRole)
-        {
-            if (ModelState.IsValid)
-            {
+        //public async Task<IActionResult> LeaderHome([Bind("UserID,RoleID")] Microsoft.AspNetCore.Identity.IdentityRole assignedRole)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
 
-                _context.Add(assignedRole);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(assignedRole);
-        }
-
-        // GET: LeadersAssigneds/ViewAllStudent/Edit
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var leadersAssigned = await _context.WebAppUsers.FindAsync(id);
-            if (leadersAssigned == null)
-            {
-                return NotFound();
-            }
-            return View(leadersAssigned);
-        }
+        //        _context.Add(assignedRole);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(assignedRole);
+        //}
 
         // POST: LeadersAssigneds/ViewAllStudent/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName,UserName,AccountType,LeaderAssigned")] WebAppUser leadersAssigned)
+        public async Task<IActionResult> StudentEdit(string id, [Bind(",LeaderAssignedID")] WebAppUser leadersAssigned)
         {
 
             if (id != leadersAssigned.Id)
@@ -124,64 +120,84 @@ namespace Quokka_App.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Update(leadersAssigned);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ViewAllStudent));
+                try
+                {
+                    _context.Update(leadersAssigned);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!LeaderAssignedExists(leadersAssigned.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(StudentEdit));
             }
             return View(leadersAssigned);
         }
 
-        // GET: LeadersAssigneds/ViewAllStudent/Delete
-        //[Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Delete(string id)
+        private bool LeaderAssignedExists(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var leadersAssigned = await _context.WebAppUsers
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (leadersAssigned == null)
-            {
-                return NotFound();
-            }
-
-            return View(leadersAssigned);
+            return _context.WebAppUsers.Any(e => e.Id == id);
         }
 
-        // POST: LeadersAssigneds/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> AssignLeader(string id, [Bind("LeaderAssignedID")] WebAppUser leadersAssigned)
         {
-            var leadersAssigned = await _context.WebAppUsers.FindAsync(id);
-            _context.WebAppUsers.Remove(leadersAssigned);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(LeaderHome));
-        }
 
-        //private bool leadersassignedexists(string id)
-        //{
-        //    return _context.leadersassigned.any(e => e.id == id);
-        //}
+            if (id != leadersAssigned.Id)
+            {
+                return NotFound();
+            }
 
-        public async Task<IActionResult> AssignLeader([Bind("CheckedBy,ReportChecked,AssignedDate,CompleteDate")] LeaderAssignedReport leaderAssigned)
-        {
             if (ModelState.IsValid)
             {
-                _context.Add(leaderAssigned);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("StudentCommentView", new { leaderAssigned });
+                try
+                {
+                    _context.Update(leadersAssigned);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!LeaderAssignedExists(leadersAssigned.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(StudentEdit));
             }
-            return View(leaderAssigned);
+            return View(leadersAssigned);
         }
 
-        public void AssignLeaderToStudent(object sender, EventArgs e)
+        //public ActionResult AssignLeader(bool isActive = false)
+        //{
+        //    var list = _userManager.Users
+        //        .OrderBy(lname => lname.LastName)
+        //        .OrderBy(fname => fname.FirstName)
+        //        .Select(users => users);
+
+        //    if (isActive)
+        //    {
+        //        list = list.Where(user => user.IsActive == isActive);
+        //    }
+        //    return View(list);
+        //}
+
+        public async Task<IActionResult> AssignLeader()
         {
-            
+            return View(await _context.WebAppUsers.ToListAsync());
         }
+
+
     }
 }

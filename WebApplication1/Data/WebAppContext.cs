@@ -21,6 +21,7 @@ namespace Quokka_App.Data
         public DbSet<LeaderAssignedReport> GetAssignedReports { get; set; }
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
         public DbSet<Emotion> EmotionsDb { get; set; }
+        public DbSet<EmergencyContact> EmergencyContact { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,10 +61,10 @@ namespace Quokka_App.Data
                 .HasForeignKey(sr => sr.ReportID);
 
             //Association of 1 to many in User and StudentReports table
-            builder.Entity<StudentReports>()
-                .HasOne(s => s.SRWebAppUser)
-                .WithMany(g => g.UserStudentReport)
-                .HasForeignKey(s => s.UserID);
+            //builder.Entity<StudentReports>()
+            //    .HasOne(s => s.SRWebAppUser)
+            //    .WithMany(g => g.UserStudentReport)
+            //    .HasForeignKey(s => s.UserID);
 
             //Association of 1 to many in User FirstName and StudentReports table
             builder.Entity<StudentReports>()

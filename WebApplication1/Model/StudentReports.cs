@@ -24,9 +24,8 @@ namespace Quokka_App.Model
         [Display(Name = "Student Comment")]
         public string StudentComment { get; set; }
 
-        [DataType(DataType.Date)]
         [Display(Name = "Appointment Date")]
-        public DateTime? AppointmentDate { get; set; }
+        public string AppointmentDate { get; set; }
 
         [Column(Order = 4)]
         [Display(Name = "Complete Date")]
@@ -36,7 +35,7 @@ namespace Quokka_App.Model
 
         [Column(Order = 7)]
         [Display(Name = "Completed")]
-        public bool? IsComplete { get; set; } = true;
+        public bool? IsComplete { get; set; } = false;
 
         //Navigation Properties 
 
@@ -46,15 +45,18 @@ namespace Quokka_App.Model
         //Relation to LeaderAssignment table
         public virtual List<LeaderAssignedReport> SRLeaderAssigned { get; set; }
 
-        //User ID of the Assignee
-        [Display(Name = "Asignee ID")]
+        //User ID of the Assignee and leader
+        [Display(Name = "Leader ID")]
         public string UserID { get; set; }
+        public string ReporterID { get; set; }
         public virtual WebAppUser SRWebAppUser { get; set; }
 
         //Collects data from the student emotion table
-        [Display(Name = "Student Feeling")]
+        [Display(Name = "Emotion ID")]
         public int Feeling { get; set; }
         public virtual Emotion SREmotion{ get; set; }
+
+       
 
     }
 }

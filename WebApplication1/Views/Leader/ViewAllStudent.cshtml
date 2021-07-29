@@ -33,18 +33,17 @@
         <tbody>
             @foreach (var item in Model)
             {
-<tr class="@(item.IsActive == false ? "table-danger" : "")">
-    <td><p>@Html.DisplayFor(modelItem => item.FirstName)</p></td>
-    <td><p>@Html.DisplayFor(modelItem => item.LastName)</p></td>
-    <td><p>@Html.DisplayFor(modelItem => item.UserName)</p></td>
-    <td>
-        <form asp-action="ViewAllStudent" asp-controller="Leader" method="post">
-
-            <input type="submit" asp-for="@item.IsActive" class="@(item.IsActive == false)" />
-        </form>
-    </td>
-</tr>
-       }
+                <tr class="@(item.IsActive == false ? "table-danger" : "")">
+                    <td><p>@Html.DisplayFor(modelItem => item.FirstName)</p></td>
+                    <td><p>@Html.DisplayFor(modelItem => item.LastName)</p></td>
+                    <td><p>@Html.DisplayFor(modelItem => item.UserName)</p></td>
+                    <td>
+                        <form asp-action="ViewAllStudent" asp-controller="Leader" method="post">
+                            <input type="submit" asp-for="@item.IsActive" class="@(item.IsActive == true)" />
+                        </form>
+                    </td>
+                </tr>
+             }
         </tbody>
     </table>
 </div>

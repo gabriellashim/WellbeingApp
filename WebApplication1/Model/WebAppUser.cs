@@ -34,6 +34,9 @@ namespace Quokka_App.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime? AccountCreated { get; set; }
 
+        [Display(Name = "Leader AssignedID")]
+        public string LeaderAssignedID { get; set; }
+
         //Navigation Properties
         public virtual List<LeaderChecked> Userleaderchecked { get; set; }
         public virtual List<LeaderAssignedReport> UserLeaderAssigned { get; set; }

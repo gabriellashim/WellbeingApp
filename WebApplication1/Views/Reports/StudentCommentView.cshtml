@@ -9,10 +9,18 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ID" />
     <div class="row mb-3">
-        <label asp-for="UserID" class="col-sm-2 col-form-label">Your User Name</label>
+        <label asp-for="ReporterID" class="col-sm-2 col-form-label">Your User Name</label>
+        <div class="col-sm-10">
+            <input asp-for="ReporterID" class="form-control prefilled text-primary"
+                   value="@UserManager.GetUserAsync(User).Result.UserName"
+                   readonly />
+        </div>
+    </div>
+    <div class="row mb-3" style="display: none">
+        <label asp-for="UserID" class="col-sm-2 col-form-label">Send to</label>
         <div class="col-sm-10">
             <input asp-for="UserID" class="form-control prefilled text-primary"
-                   value="@UserManager.GetUserAsync(User).Result.UserName"
+                   value="@UserManager.GetUserAsync(User).Result.LeaderAssignedID"
                    readonly />
         </div>
     </div>
@@ -75,15 +83,15 @@
         </legend>
         <div class="col-sm-10">
             <div class="form-check">
-                <input class="form-check-input" id="Asap" type="radio" asp-for="AppointmentDate" value="Asap" name="whenToSee">
+                <input class="form-check-input" id="Asap" type="radio" asp-for="AppointmentDate" value="Asap" name="AppointmentDate">
                 <label class="form-check-label" for="Asap"> As soon as possible</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" id="NextWeek" type="radio" asp-for="AppointmentDate" value="Next Week" name="whenToSee">
+                <input class="form-check-input" id="NextWeek" type="radio" asp-for="AppointmentDate" value="Next Week" name="AppointmentDate">
                 <label class="form-check-label" for="NextWeek"> Sometimes in next week </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" id="Anytime" type="radio" asp-for="AppointmentDate" value="Anytime" name="whenToSee">
+                <input class="form-check-input" id="Anytime" type="radio" asp-for="AppointmentDate" value="Anytime" name="AppointmentDate">
                 <label class="form-check-label" for="Anytime"> Anytime</label>
             </div>
         </div>
