@@ -17,7 +17,7 @@ using Quokka_App.Model;
 
 namespace Quokka_App.Pages.Account
 {
-    [AllowAnonymous]
+    //[Authorize(Roles = "Administrator, Leader, Senior Leader")]
     public class StudentRegisterModel : PageModel
     {
         private readonly SignInManager<WebAppUser> _signInManager;

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudentReports>
+﻿@model IQueryable<StudentReports>
 @inject UserManager<WebAppUser> UserManager
 
 @{
@@ -10,7 +10,7 @@
 
 <div style="text-align:center;">
     <h4>
-        View Current Monthly
+        Reports this month
     </h4>
     <b> Current Date/Time: @DateTime.Now.Month</b>
     <hr />
@@ -20,48 +20,23 @@
 <table class="table" border="1">
     <thead>
         <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Reported Emotion
-            </th>
-            <th>
-                Report Date
-            </th>
-            <th>
-                Appointment Date
-            </th>
-            <th>
-                Student Comment
-            </th>
-            <th>
-                Score
-            </th>
+            <th>ID</th>
+            <th>Reported Emotion</th>
+            <th>Report Date </th>
+            <th>Appointment Date</th>
+            <th>Student Comment</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
 
-            @if (item.ReportDate == @currentMonth)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Feeling)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReportDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentComment)
-            </td>
+         <tr>
+            <td>@Html.DisplayFor(modelItem => item.ID)</td>
+            <td>@Html.DisplayFor(modelItem => item.Feeling)</td>
+            <td>@Html.DisplayFor(modelItem => item.ReportDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.AppointmentDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.StudentComment)</td>
 
             @*@switch (item.EmotionReported)
             {
@@ -74,10 +49,8 @@
                 default:break;
             }*@
         </tr>
-        }
     }
     </tbody>
-
 </table>
 
 <div>

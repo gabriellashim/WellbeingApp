@@ -52,12 +52,7 @@ namespace Quokka_App
                 options.Password.RequiredLength = 5;
                 options.Password.RequiredUniqueChars = 1;
 
-                // Lockout settings.
-                //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                //options.Lockout.MaxFailedAccessAttempts = 5;
-                //options.Lockout.AllowedForNewUsers = true;
-
-                // User settings.
+                // User settings
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             });
@@ -71,31 +66,8 @@ namespace Quokka_App
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
                 options.LoginPath = "/Home/Index";
-                //options.AccessDeniedPath = "";
                 options.SlidingExpiration = true;
             });
-
-            //Test this, i reckon this is getting roles by policy
-            //IdentityBuilder builder = services.AddIdentityCore<WebAppUser>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireNonAlphanumeric = true;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequiredLength = 5;
-            //    options.Password.RequiredUniqueChars = 1;
-
-            //    // Lockout settings.
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            //    options.Lockout.MaxFailedAccessAttempts = 5;
-            //    options.Lockout.AllowedForNewUsers = true;
-
-            //    // User settings.
-            //    options.User.AllowedUserNameCharacters =
-            //    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            //    options.User.RequireUniqueEmail = false;
-            //});
-            //builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
-
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -53,7 +53,8 @@ namespace Quokka_App.Model
 
         //Collects data from the student emotion table
         [Display(Name = "Emotion ID")]
-        public int Feeling { get; set; }
+        public string Feeling { get; set; }
+        public int EmotionID { get; set; }
         public virtual Emotion SREmotion{ get; set; }
 
        

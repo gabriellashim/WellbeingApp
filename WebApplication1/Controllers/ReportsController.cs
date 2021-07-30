@@ -103,7 +103,7 @@ namespace Quokka_App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "Student")]
-        public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,StudentID,Feeling,ReportDate,AppointmentDate,StudentComment,ReporterID,UserID")] StudentReports emotion)
+        public async Task<IActionResult> StudentCommentView(int id, [Bind("ID,Feeling,ReportDate,AppointmentDate,StudentComment,ReporterID,EmotionID")] StudentReports emotion)
         {
             if (id != emotion.ID)
             {
@@ -167,6 +167,5 @@ namespace Quokka_App.Controllers
         {
             return _context.StudentReportDb.Any(e => e.ID == id);
         }
-
     }
 }

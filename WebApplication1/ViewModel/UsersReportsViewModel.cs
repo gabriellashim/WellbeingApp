@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Quokka_App.ViewModel
 {
-    public class UserReportViewModel
+    public class UsersReportsViewModel
     {
-        public WebAppUser AppUser { get; set; }
-        public StudentReports Reports { get; set; }
+        public WebAppUser ApplicationUser { get; set; }
+        public List<StudentReports> AssignReport { get; set; }
     }
 }

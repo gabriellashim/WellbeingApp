@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quokka_App.Model
 {
-    
+    [Keyless]
     public class LeaderAssignedReport
     {
 
@@ -17,6 +17,9 @@ namespace Quokka_App.Model
 
         [Display(Name = "Report ID")]
         public int ReportID { get; set; }
+
+        [Display(Name = "Student ID")]
+        public string StudentID { get; set; }
 
         [Display(Name = "Assigned Date")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quokka_App.Data;
 
 namespace Quokka_App.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210729170000_LatestMigration")]
+    partial class LatestMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,24 +156,6 @@ namespace Quokka_App.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Quokka_App.Model.Assignment", b =>
-                {
-                    b.Property<int>("AssignmentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Student")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WellbeingLeader")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AssignmentID");
-
-                    b.ToTable("Assignment");
-                });
-
             modelBuilder.Entity("Quokka_App.Model.EmergencyContact", b =>
                 {
                     b.Property<int>("ContactID")
@@ -222,9 +206,6 @@ namespace Quokka_App.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("StudentID")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ReportID", "LeaderID");
 
                     b.HasIndex("LeaderID");
@@ -268,11 +249,8 @@ namespace Quokka_App.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmotionID")
+                    b.Property<int>("Feeling")
                         .HasColumnType("int");
-
-                    b.Property<string>("Feeling")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsComplete")
                         .HasColumnType("bit");
@@ -284,17 +262,20 @@ namespace Quokka_App.Migrations
                     b.Property<string>("ReporterID")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SRWebAppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("StudentComment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("EmotionID");
+                    b.HasIndex("Feeling");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("SRWebAppUserId");
 
                     b.ToTable("StudentReports");
                 });
@@ -477,13 +458,13 @@ namespace Quokka_App.Migrations
                 {
                     b.HasOne("Quokka_App.Model.Emotion", "SREmotion")
                         .WithMany("EmotionStudentReport")
-                        .HasForeignKey("EmotionID")
+                        .HasForeignKey("Feeling")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Quokka_App.Model.WebAppUser", "SRWebAppUser")
                         .WithMany("UserStudentReport")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("SRWebAppUserId");
 
                     b.Navigation("SREmotion");
 

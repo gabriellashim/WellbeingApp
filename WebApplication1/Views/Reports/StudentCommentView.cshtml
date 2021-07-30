@@ -11,25 +11,22 @@
     <div class="row mb-3">
         <label asp-for="ReporterID" class="col-sm-2 col-form-label">Your User Name</label>
         <div class="col-sm-10">
-            <input asp-for="ReporterID" class="form-control prefilled text-primary"
-                   value="@UserManager.GetUserAsync(User).Result.UserName"
-                   readonly />
+            <input type="hidden" asp-for="ReporterID" class="form-control prefilled text-primary"
+                   value="@UserManager.GetUserAsync(User).Result.UserName" readonly />
         </div>
     </div>
     <div class="row mb-3" style="display: none">
-        <label asp-for="UserID" class="col-sm-2 col-form-label">Send to</label>
+        <label asp-for="ReporterID" class="col-sm-2 col-form-label">Send to</label>
         <div class="col-sm-10">
-            <input asp-for="UserID" class="form-control prefilled text-primary"
-                   value="@UserManager.GetUserAsync(User).Result.LeaderAssignedID"
-                   readonly />
+            <input asp-for="ReporterID" class="form-control prefilled text-primary"
+                   value="@UserManager.GetUserAsync(User).Result.LeaderAssignedID" readonly />
         </div>
     </div>
     <div class="row mb-3">
         <label asp-for="ReportDate" class="col-sm-2 col-form-label">Today's date</label>
         <div class="col-sm-10">
             <input type="text" asp-for="ReportDate" class="form-control prefilled text-primary"
-                   value="@DateTime.Now.ToString("dd/MM/yy")"
-                   readonly />
+                   value="@DateTime.Now.ToString("dd/MM/yy")" readonly />
         </div>
     </div>
 
@@ -40,11 +37,34 @@
             You have selected
         </label>
         <div class="col-sm-10">
-            <input asp-for="Feeling"
-                   class="form-control prefilled text-primary" readonly />
+            <input asp-for="Feeling" class="form-control prefilled text-primary" readonly />
         </div>
     </div>
-
+    <div>
+        @switch (Model.Feeling)
+        {
+            case ("Happy"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="0" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span>
+                break;
+            case ("Okay"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="1" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span> break;
+            case ("Annoyed"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="2" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span> break;
+            case ("Frustrated"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="3" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span> break;
+            case ("Angry"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="4" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span> break;
+            case ("Help"):
+                <input type="hidden" asp-for="EmotionID" class="form-control prefilled text-primary" value="5" />
+                <span asp-validation-for="EmotionID" class="text-danger"></span>break;
+            default: break;
+        }
+    </div>
     <div class="row mb-3">
         <label class="col-sm-12 col-form-label">
             Why have you chosen this?

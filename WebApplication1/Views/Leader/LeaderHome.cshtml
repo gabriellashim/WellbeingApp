@@ -19,7 +19,6 @@
             {
                 if (user.UserName == notification.StudentID)
                 {
-
                     notificationCount++;
                 }
             }
@@ -49,17 +48,6 @@
             </a>
         </div>
     </div>
-
-    <!-- 
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <a asp-action="ViewWeekly" class="btn btn-primary btn-lg leaderBtn">
-                <i class="fas fa-user-clock"></i>
-                View Weekly Status
-            </a>
-        </div>
-    </div>
-    -->
     <div class="row mb-3">
         <div class="col-md-12">
             <a asp-action="ViewMonthly" class="btn btn-primary btn-lg leaderBtn">
@@ -76,13 +64,9 @@
             </a>
         </div>
     </div>
-
 </form>
 
 <script>
-    function myFunction() {
-        @notificationCount = 0;
-    }
 </script>
 
 @section Scripts {

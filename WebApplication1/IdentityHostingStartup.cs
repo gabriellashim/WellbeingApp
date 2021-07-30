@@ -31,14 +31,3 @@ namespace Quokka_App
         }
     }
 }
-
-
-//services.AddIdentity<WebAppUser, IdentityRole>(options =>
-//{
-//    options.SignIn.RequireConfirmedAccount = false;
-//    options.Password.RequireLowercase = false;
-//    options.Password.RequireUppercase = false;
-//})
-//           .AddEntityFrameworkStores<WebAppContext>()
-//           .AddDefaultTokenProviders();
-//RoleManager<IdentityRole> roleManager)

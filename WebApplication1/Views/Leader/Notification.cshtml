@@ -3,22 +3,42 @@
 
 @{
     var userRoles = await _userManager.GetUsersInRoleAsync("Student");
+    Layout = "/Pages/Shared/_Layout.cshtml";
+
 }
 
 <h1>Notification</h1>
 <body>
-    <div>
-        <form>
-            @foreach (var roles in userRoles)
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th><p>Feeling</p></th>
+                <th><p>Appointment</p></th>
+                <th><p>Student Comment</p></th>
+                <th><p>Completed?</p></th>
+                <th><p>Reporter ID</p></th>
+                <th><p>Date Reported</p></th>
+
+            </tr>   
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                foreach (var report in Model)
-                {
-                    if (roles.Id == report.UserID)
-                    {
-                        <p>@report</p>
-                    }
-                }
+            <tr class="@(item.IsComplete == false ? "table-danger" : "")">
+                <td><p>@Html.DisplayFor(modelItem => item.Feeling)</p></td>
+                <td><p>@Html.DisplayFor(modelItem => item.AppointmentDate)</p></td>
+                <td><p>@Html.DisplayFor(modelItem => item.StudentComment)</p></td>
+                <td><p>@Html.DisplayFor(modelItem => item.IsComplete)</p></td>
+                <td><p>@Html.DisplayFor(modelItem => item.ReporterID)</p></td>
+                <td><p>@Html.DisplayFor(modelItem => item.ReportDate)</p></td>
+                <td>
+                    <form asp-action="Notification" asp-controller="Leader" method="post">
+                        <input type="submit" asp-for="@item.IsComplete" class="@(item.IsComplete == true)" />
+                    </form>
+                </td>
+            </tr>
             }
-        </form>
-    </div>
+        </tbody>
+     </table>
+
 </body>

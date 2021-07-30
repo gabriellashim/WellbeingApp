@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quokka_App.Data;
 
 namespace Quokka_App.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210730053035_FixEmotionPrimaryKey")]
+    partial class FixEmotionPrimaryKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
